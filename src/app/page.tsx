@@ -142,7 +142,11 @@ export default function Home() {
                 <a href="#" className="footer-link">
                   Twitter
                 </a>
-                <a href="#" className="footer-link">
+                <a
+                  href="https://www.instagram.com/loonahash/"
+                  className="footer-link"
+                  target="_blank"
+                >
                   Instagram
                 </a>
                 <a href="#" className="footer-link">
