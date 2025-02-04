@@ -187,19 +187,19 @@ function StatCard({ value, label }: { value: string; label: string }) {
 }
 
 // Add new CSS classes for gradient overlay and text
-const additionalCSS = `
-.gradient-overlay {
-  position: fixed;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), transparent, rgba(0, 0, 0, 0.3));
-  pointer-events: none;
-  z-index: 1;
-}
+// const additionalCSS = `
+// .gradient-overlay {
+//   position: fixed;
+//   inset: 0;
+//   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), transparent, rgba(0, 0, 0, 0.3));
+//   pointer-events: none;
+//   z-index: 1;
+// }
 
-.gradient-text {
-  background: linear-gradient(to right, var(--color-purple-primary), var(--color-text-light));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-`;
+// .gradient-text {
+//   background: linear-gradient(to right, var(--color-purple-primary), var(--color-text-light));
+//   -webkit-background-clip: text;
+//   background-clip: text;
+//   color: transparent;
+// }
+// `;
