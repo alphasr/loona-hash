@@ -1,0 +1,28 @@
+// Colors
+$colors: (
+  background: #000,
+  purple: (
+    primary: #a855f7,
+    light: #b975f9,
+    dark: #1a1a1a,
+  ),
+  text: (
+    light: #fff,
+    gray: #ccc,
+  ),
+  overlay: (
+    dark: rgba(0, 0, 0, 0.9),
+    purple: rgba(168, 85, 247, 0.1),
+    glass: rgba(18, 10, 28, 0.9),
+  ),
+);
+
+// Breakpoints
+$breakpoints: (
+  small: 375px,
+  mobile: 480px,
+  tablet: 768px,
+  laptop: 1024px,
+  desktop: 1200px,
+  wide: 1440px,
+);

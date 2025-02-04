@@ -1,95 +1,159 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+
+import { useState } from "react";
+import SplineBackground from "./component/spline/spline";
+import Gameplay from "./component/gameplay/gameplay";
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [activeSection, setActiveSection] = useState("home");
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+  const sections = [
+    { id: "home", label: "HOME" },
+    { id: "gameplay", label: "GAMEPLAY" },
+    { id: "rewards", label: "REWARDS" },
+    { id: "stats", label: "STATS" },
+    { id: "team", label: "TEAM" },
+  ];
+
+  const renderContent = () => {
+    switch (activeSection) {
+      case "home":
+        return (
+          <>
+            <h1 className="title">#LOONAHASH</h1>
+            <p className="description">Mining Simulation Game</p>
+          </>
+        );
+
+      case "gameplay":
+        return <Gameplay />;
+
+      case "rewards":
+        return (
+          <>
+            <h1 className="title">REWARDS</h1>
+            <p className="description">
+              Be the first to find the perfect hash.
+              <br />
+              Claim your rewards instantly.
+            </p>
+          </>
+        );
+
+      case "stats":
+        return (
+          <>
+            <h1 className="title">STATS</h1>
+            <p className="description">
+              Track your progress and network growth
+            </p>
+            <div className="stats-container">
+              <StatCard value="1.8M+" label="Monthly Active Users" />
+              <StatCard value="1M+" label="Community Members" />
+              <StatCard value="520K+" label="Token Holders" />
+            </div>
+          </>
+        );
+
+      case "team":
+        return (
+          <>
+            <h1 className="title">THE TEAM</h1>
+            <p className="description">14 Visionaries</p>
+            <div className="stats-container">
+              <StatCard value="3" label="Core Developers" />
+              <StatCard value="6" label="Product Designers" />
+              <StatCard value="5" label="Growth Specialists" />
+            </div>
+          </>
+        );
+
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="page-wrapper">
+      <SplineBackground />
+      <div className="content-wrapper">
+        {/* Navigation */}
+        <nav className="nav">
+          <div className="nav-content">
+            <ul className="nav-list">
+              {sections.map((section) => (
+                <li key={section.id}>
+                  <button
+                    onClick={() => setActiveSection(section.id)}
+                    className={`nav-button ${
+                      activeSection === section.id ? "active" : ""
+                    }`}
+                  >
+                    {section.label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </nav>
+
+        {/* Main Content */}
+        <main className="main">
+          <section className={`hero-section ${activeSection}`}>
+            <div className="hero-content">{renderContent()}</div>
+          </section>
+        </main>
+      </div>
+
+      {/* Footer */}
+      <footer className="footer">
+        <div className="footer-content">
+          <div className="footer-section">
+            <h3 className="footer-title">About</h3>
+            <p>Discover the future of mining simulation</p>
+          </div>
+          <div className="footer-section">
+            <h3 className="footer-title">Connect</h3>
+            <div className="footer-links">
+              <a href="#" className="footer-link">
+                Twitter
+              </a>
+              <a href="#" className="footer-link">
+                Discord
+              </a>
+              <a href="#" className="footer-link">
+                Telegram
+              </a>
+            </div>
+          </div>
+          <div className="footer-section">
+            <h3 className="footer-title">Resources</h3>
+            <div className="footer-links">
+              <a href="#" className="footer-link">
+                Documentation
+              </a>
+              <a href="#" className="footer-link">
+                Whitepaper
+              </a>
+              <a href="#" className="footer-link">
+                FAQ
+              </a>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+        <div className="footer-bottom">
+          <p>&copy; 2025 LOONAHASH. All rights reserved.</p>
+        </div>
       </footer>
+    </div>
+  );
+}
+
+function StatCard({ value, label }: { value: string; label: string }) {
+  return (
+    <div className="stat-card">
+      <div className="stat-value">{value}</div>
+      <div className="stat-label">{label}</div>
     </div>
   );
 }

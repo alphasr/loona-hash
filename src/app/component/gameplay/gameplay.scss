@@ -1,0 +1,85 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.hero-section.gameplay {
+  min-height: calc(100vh - 220px);
+  @include flex(column);
+  padding: 2rem;
+  transition: padding 0.3s ease;
+
+  .title {
+    font-size: 5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: map-get($colors, purple, primary);
+    transition: font-size 0.3s ease;
+  }
+
+  .description {
+    font-size: 1.5rem;
+    color: map-get($colors, text, gray);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    transition: font-size 0.3s ease;
+  }
+}
+
+// Responsive styles for gameplay section
+@include responsive(laptop) {
+  .hero-section.gameplay {
+    .title {
+      font-size: 4rem;
+    }
+  }
+}
+
+@include responsive(tablet) {
+  .hero-section.gameplay {
+    min-height: calc(100vh - 70px);
+    padding: 1.5rem;
+
+    .title {
+      font-size: 3rem;
+    }
+
+    .description {
+      font-size: 1.25rem;
+    }
+  }
+}
+
+@include responsive(mobile) {
+  .hero-section.gameplay {
+    min-height: calc(100vh - 78px);
+    padding: 1rem;
+
+    .title {
+      font-size: 2.5rem;
+    }
+
+    .description {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+}
+
+@include responsive(small) {
+  .hero-section.gameplay {
+    .title {
+      font-size: 2rem;
+    }
+
+    .description {
+      font-size: 1rem;
+    }
+  }
+}
+
+// Landscape mode adjustments
+@media screen and (max-height: 600px) and (orientation: landscape) {
+  .hero-section.gameplay {
+    padding: 3rem 1rem;
+    min-height: auto;
+  }
+}
