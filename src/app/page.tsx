@@ -143,7 +143,7 @@ export default function Home() {
                   Twitter
                 </a>
                 <a href="#" className="footer-link">
-                  Discord
+                  Instagram
                 </a>
                 <a href="#" className="footer-link">
                   Telegram
