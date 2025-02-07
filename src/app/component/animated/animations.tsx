@@ -1,7 +1,37 @@
 "use client";
 
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { useState } from "react";
+import { useState, ReactNode, KeyboardEvent } from "react";
+
+interface ParallaxSectionProps {
+  children: ReactNode;
+  offset?: number;
+}
+
+interface AnimatedTextProps {
+  text: string;
+  className?: string;
+}
+
+interface Card3DProps {
+  children: ReactNode;
+}
+
+interface FloatingElementProps {
+  children: ReactNode;
+  delay?: number;
+}
+
+interface ScrollToSectionProps {
+  targetId: string;
+  children: ReactNode;
+}
+
+interface MagneticButtonProps {
+  children: ReactNode;
+  className?: string;
+  onClick?: () => void;
+}
 
 // Enhanced scroll progress indicator
 export const ScrollProgressBar = () => {
@@ -21,7 +51,10 @@ export const ScrollProgressBar = () => {
 };
 
 // Enhanced section transition with parallax
-export const ParallaxSection = ({ children, offset = 50 }) => {
+export const ParallaxSection: React.FC<ParallaxSectionProps> = ({
+  children,
+  offset = 50,
+}) => {
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], [0, offset]);
 
@@ -33,7 +66,10 @@ export const ParallaxSection = ({ children, offset = 50 }) => {
 };
 
 // Animated text that reveals character by character
-export const AnimatedText = ({ text, className = "" }) => {
+export const AnimatedText: React.FC<AnimatedTextProps> = ({
+  text,
+  className = "",
+}) => {
   const letters = Array.from(text);
 
   const container = {
@@ -87,11 +123,11 @@ export const AnimatedText = ({ text, className = "" }) => {
 };
 
 // Enhanced card with 3D hover effect
-export const Card3D = ({ children }) => {
+export const Card3D: React.FC<Card3DProps> = ({ children }) => {
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -129,7 +165,10 @@ export const Card3D = ({ children }) => {
 };
 
 // Floating animation for elements
-export const FloatingElement = ({ children, delay = 0 }) => (
+export const FloatingElement: React.FC<FloatingElementProps> = ({
+  children,
+  delay = 0,
+}) => (
   <motion.div
     animate={{
       y: [0, -10, 0],
@@ -146,16 +185,16 @@ export const FloatingElement = ({ children, delay = 0 }) => (
   </motion.div>
 );
 
-// Magnetic button effect
-
 // Smooth scroll to section with progress indicator
-export const ScrollToSection = ({ targetId, children }) => {
+export const ScrollToSection: React.FC<ScrollToSectionProps> = ({
+  targetId,
+  children,
+}) => {
   const handleClick = () => {
     const target = document.getElementById(targetId);
     if (target) {
       const targetPosition =
         target.getBoundingClientRect().top + window.pageYOffset;
-
       window.scrollTo({
         top: targetPosition,
         behavior: "smooth",
@@ -180,7 +219,9 @@ export const LoadingSpinner = () => (
 );
 
 // Page transition wrapper
-export const PageTransition = ({ children }) => (
+export const PageTransition: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
@@ -195,12 +236,15 @@ export const PageTransition = ({ children }) => (
   </motion.div>
 );
 
-// Updated MagneticButton component
-
-export const MagneticButton = ({ children, className = "", onClick }) => {
+// Magnetic button component
+export const MagneticButton: React.FC<MagneticButtonProps> = ({
+  children,
+  className = "",
+  onClick,
+}) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const { currentTarget, clientX, clientY } = e;
     const { left, top, width, height } = currentTarget.getBoundingClientRect();
 
@@ -214,6 +258,12 @@ export const MagneticButton = ({ children, className = "", onClick }) => {
     setPosition({ x: 0, y: 0 });
   };
 
+  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Enter" || e.key === " ") {
+      onClick?.();
+    }
+  };
+
   return (
     <motion.div
       className={`magnetic-wrapper ${className}`}
@@ -224,11 +274,7 @@ export const MagneticButton = ({ children, className = "", onClick }) => {
       onClick={onClick}
       role="button"
       tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          onClick?.();
-        }
-      }}
+      onKeyDown={handleKeyDown}
     >
       {children}
     </motion.div>
