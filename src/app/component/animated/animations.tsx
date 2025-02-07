@@ -155,8 +155,6 @@ export const ScrollToSection = ({ targetId, children }) => {
     if (target) {
       const targetPosition =
         target.getBoundingClientRect().top + window.pageYOffset;
-      const startPosition = window.pageYOffset;
-      const distance = targetPosition - startPosition;
 
       window.scrollTo({
         top: targetPosition,
