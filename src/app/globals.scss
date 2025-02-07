@@ -115,6 +115,7 @@ body {
   border-bottom: 1px solid map-get($colors, overlay, purple);
   z-index: 1000;
   @include glass-effect;
+  overflow: hidden; // Prevent horizontal scroll
 
   &-content {
     max-width: map-get($breakpoints, wide);
@@ -125,11 +126,11 @@ body {
     position: relative;
   }
 
-  // Logo Styles
   &-logo {
     flex-shrink: 0;
     position: relative;
     padding: 4px;
+    margin-right: 0.5rem;
 
     &::before {
       content: "";
@@ -146,16 +147,16 @@ body {
     }
 
     .logo-link {
-      @include flex(row, flex-start, center, 0.75rem);
+      @include flex(row, flex-start, center);
       text-decoration: none;
       color: map-get($colors, text, light);
       font-weight: 600;
-      padding: 4px 8px;
+      padding: 4px;
     }
 
     .logo {
-      width: 32px;
-      height: 32px;
+      width: 32px !important;
+      height: 32px !important;
       object-fit: contain;
       transition: transform 0.3s ease;
     }
@@ -165,26 +166,26 @@ body {
     }
   }
 
-  // Desktop Navigation
-  .desktop-nav {
-    @include flex($gap: clamp(1rem, 2vw, 2rem));
+  .nav-list {
+    @include flex($gap: clamp(0.25rem, 1.5vw, 2rem));
     list-style: none;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    width: max-content; // Ensure list takes only needed width
+    padding: 0 0.5rem;
   }
 
-  // Navigation Buttons
   &-button {
     background: none;
     border: none;
     color: map-get($colors, text, gray);
     cursor: pointer;
     transition: all 0.3s ease;
-    font-size: clamp(0.8rem, 2vw, 1rem);
-    letter-spacing: 1px;
+    font-size: clamp(0.7rem, 1.5vw, 1rem);
+    letter-spacing: 0.5px;
     text-transform: uppercase;
-    padding: 8px 16px;
+    padding: 4px clamp(4px, 1vw, 8px);
     white-space: nowrap;
     position: relative;
 
@@ -205,55 +206,6 @@ body {
       color: map-get($colors, purple, primary);
       &::after {
         width: 80%;
-      }
-    }
-  }
-
-  // Mobile Menu Button
-  .mobile-menu-button {
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 20px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    z-index: 1001;
-
-    .hamburger-line {
-      width: 100%;
-      height: 2px;
-      background-color: map-get($colors, text, light);
-      transition: all 0.3s ease;
-    }
-
-    &:hover .hamburger-line {
-      background-color: map-get($colors, purple, primary);
-    }
-  }
-
-  // Mobile Navigation
-  .mobile-nav {
-    display: none;
-    position: fixed;
-    top: $nav-height;
-    left: 0;
-    width: 100%;
-    background-color: map-get($colors, overlay, dark);
-    @include glass-effect;
-    padding: 1rem;
-    border-bottom: 1px solid map-get($colors, overlay, purple);
-    animation: slideDown 0.3s ease forwards;
-
-    &-list {
-      @include flex(column, center, center, 1rem);
-      list-style: none;
-
-      li {
-        width: 100%;
-        text-align: center;
       }
     }
   }
@@ -314,6 +266,7 @@ body {
   width: 100%;
   max-width: map-get($breakpoints, wide);
   padding: 0 clamp(1rem, 5vw, 2rem);
+  flex-wrap: wrap;
 }
 
 .stat-card {
@@ -427,25 +380,19 @@ body {
 // Responsive Styles
 @media (max-width: map-get($breakpoints, tablet)) {
   .nav {
-    .desktop-nav {
-      display: none;
+    &-content {
+      padding: 0 0.5rem;
+      justify-content: flex-start;
     }
 
-    .mobile-menu-button {
-      display: flex;
+    .nav-list {
+      gap: 0.5rem;
+      padding: 0 0.25rem;
     }
 
-    .mobile-nav {
-      display: block;
-    }
-
-    &-logo {
-      padding: 2px;
-
-      .logo {
-        width: 24px;
-        height: 24px;
-      }
+    &-button {
+      padding: 4px;
+      font-size: 0.75rem;
     }
   }
 
@@ -454,30 +401,33 @@ body {
     align-items: center;
   }
 
-  .footer {
-    &-content {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0.5rem;
-    }
-
-    &-section {
-      align-items: flex-start;
-    }
-
-    &-links {
-      flex-direction: row;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-    }
+  .footer-content {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
   }
 }
 
 @media (max-width: map-get($breakpoints, mobile)) {
-  .nav-logo {
-    .logo {
-      width: 24px;
-      height: 24px;
+  .nav {
+    &-logo {
+      padding: 2px;
+
+      .logo {
+        width: 24px !important;
+        height: 24px !important;
+      }
+    }
+
+    .nav-list {
+      position: relative;
+      left: auto;
+      transform: none;
+      margin-left: 0.5rem;
+    }
+
+    &-button {
+      font-size: 0.7rem;
+      letter-spacing: 0;
     }
   }
 
@@ -502,7 +452,7 @@ body {
 
     &-links {
       justify-content: center;
-      gap: 1rem;
+      gap: 0.75rem;
     }
   }
 }

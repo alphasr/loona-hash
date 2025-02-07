@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import SplineBackground from "./component/spline/spline";
 import Gameplay from "./component/gameplay/gameplay";
@@ -14,18 +15,44 @@ import {
   LoadingSpinner,
 } from "./component/animated/animations";
 
-const sections = [
+// Types
+type Section = {
+  id: string;
+  label: string;
+};
+
+type StatCardProps = {
+  value: string;
+  label: string;
+};
+
+const sections: Section[] = [
   { id: "home", label: "HOME" },
   { id: "gameplay", label: "GAMEPLAY" },
   { id: "rewards", label: "REWARDS" },
   { id: "stats", label: "STATS" },
   { id: "team", label: "TEAM" },
-] as const;
+];
+
+const socialLinks = [
+  { name: "Twitter", url: "#", id: "twitter" },
+  {
+    name: "Instagram",
+    url: "https://www.instagram.com/loonahash/",
+    id: "instagram",
+  },
+  { name: "Telegram", url: "#", id: "telegram" },
+];
+
+const resourceLinks = [
+  { name: "Documentation", url: "#", id: "docs" },
+  { name: "Whitepaper", url: "#", id: "whitepaper" },
+  { name: "FAQ", url: "#", id: "faq" },
+];
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [activeSection, setActiveSection] = useState("home");
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [activeSection, setActiveSection] = useState<string>("home");
 
   // Initial loading animation
   useEffect(() => {
@@ -57,10 +84,8 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
-  // Close mobile menu on section change
   const handleSectionClick = (sectionId: string) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
-    setIsMobileMenuOpen(false);
   };
 
   if (isLoading) {
@@ -87,18 +112,21 @@ export default function Home() {
                 <FloatingElement delay={0.1}>
                   <MagneticButton>
                     <a href="#home" className="logo-link">
-                      <img
+                      <Image
                         src="/assets/logo.png"
                         alt="LoonaHash Logo"
+                        width={32}
+                        height={32}
                         className="logo"
+                        priority
                       />
                     </a>
                   </MagneticButton>
                 </FloatingElement>
               </div>
 
-              {/* Desktop Navigation */}
-              <ul className="nav-list desktop-nav">
+              {/* Navigation Links */}
+              <ul className="nav-list">
                 {sections.map((section) => (
                   <li key={section.id}>
                     <MagneticButton>
@@ -114,39 +142,6 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-
-              {/* Mobile Menu Button */}
-              <button
-                className="mobile-menu-button"
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                aria-label="Toggle mobile menu"
-              >
-                <span className="hamburger-line"></span>
-                <span className="hamburger-line"></span>
-                <span className="hamburger-line"></span>
-              </button>
-
-              {/* Mobile Navigation */}
-              {isMobileMenuOpen && (
-                <div className="mobile-nav">
-                  <ul className="mobile-nav-list">
-                    {sections.map((section) => (
-                      <li key={section.id}>
-                        <MagneticButton>
-                          <span
-                            onClick={() => handleSectionClick(section.id)}
-                            className={`nav-button ${
-                              activeSection === section.id ? "active" : ""
-                            }`}
-                          >
-                            {section.label}
-                          </span>
-                        </MagneticButton>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
             </div>
           </nav>
 
@@ -243,46 +238,37 @@ export default function Home() {
               <div className="footer-section">
                 <h3 className="footer-title">Connect</h3>
                 <div className="footer-links">
-                  <MagneticButton>
-                    <a href="#" className="footer-link">
-                      Twitter
-                    </a>
-                  </MagneticButton>
-                  <MagneticButton>
-                    <a
-                      href="https://www.instagram.com/loonahash/"
-                      className="footer-link"
-                      target="_blank"
-                    >
-                      Instagram
-                    </a>
-                  </MagneticButton>
-                  <MagneticButton>
-                    <a href="#" className="footer-link">
-                      Telegram
-                    </a>
-                  </MagneticButton>
+                  {socialLinks.map((link) => (
+                    <MagneticButton key={link.id}>
+                      <a
+                        href={link.url}
+                        className="footer-link"
+                        target={
+                          link.url.startsWith("http") ? "_blank" : undefined
+                        }
+                        rel={
+                          link.url.startsWith("http")
+                            ? "noopener noreferrer"
+                            : undefined
+                        }
+                      >
+                        {link.name}
+                      </a>
+                    </MagneticButton>
+                  ))}
                 </div>
               </div>
 
               <div className="footer-section">
                 <h3 className="footer-title">Resources</h3>
                 <div className="footer-links">
-                  <MagneticButton>
-                    <a href="#" className="footer-link">
-                      Documentation
-                    </a>
-                  </MagneticButton>
-                  <MagneticButton>
-                    <a href="#" className="footer-link">
-                      Whitepaper
-                    </a>
-                  </MagneticButton>
-                  <MagneticButton>
-                    <a href="#" className="footer-link">
-                      FAQ
-                    </a>
-                  </MagneticButton>
+                  {resourceLinks.map((link) => (
+                    <MagneticButton key={link.id}>
+                      <a href={link.url} className="footer-link">
+                        {link.name}
+                      </a>
+                    </MagneticButton>
+                  ))}
                 </div>
               </div>
             </div>
@@ -298,7 +284,7 @@ export default function Home() {
 }
 
 // Animated StatCard Component
-function AnimatedStatCard({ value, label }: { value: string; label: string }) {
+function AnimatedStatCard({ value, label }: StatCardProps) {
   return (
     <Card3D>
       <div className="stat-card">
