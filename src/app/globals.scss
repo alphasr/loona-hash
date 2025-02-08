@@ -9,6 +9,7 @@ $colors: (
   text: (
     light: #fff,
     gray: #ccc,
+    off-white: #393434,
   ),
   overlay: (
     dark: rgba(0, 0, 0, 0.9),
@@ -112,7 +113,7 @@ body {
   width: 100%;
   height: $nav-height;
   background-color: map-get($colors, overlay, dark);
-  border-bottom: 1px solid map-get($colors, overlay, purple);
+  border-bottom: 1px solid map-get($colors, text, off-white);
   z-index: 1000;
   @include glass-effect;
   overflow: hidden; // Prevent horizontal scroll
@@ -132,31 +133,18 @@ body {
     padding: 4px;
     margin-right: 0.5rem;
 
-    &::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border: 2px solid map-get($colors, text, light);
-      opacity: 0.4;
-      border-radius: 8px;
-      transition: opacity 0.3s ease;
-    }
-
-    &:hover::before {
-      opacity: 0.8;
-    }
-
     .logo-link {
       @include flex(row, flex-start, center);
       text-decoration: none;
-      color: map-get($colors, text, light);
+      background-color: map-get($colors, text, light);
       font-weight: 600;
       padding: 4px;
+      border-radius: 50%;
     }
 
     .logo {
-      width: 32px !important;
-      height: 32px !important;
+      width: 35px;
+      height: 35px;
       object-fit: contain;
       transition: transform 0.3s ease;
     }

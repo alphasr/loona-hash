@@ -109,20 +109,18 @@ export default function Home() {
             <div className="nav-content">
               {/* Logo Section */}
               <div className="nav-logo">
-                <FloatingElement delay={0.1}>
-                  <MagneticButton>
-                    <a href="#home" className="logo-link">
-                      <Image
-                        src="/assets/logo.png"
-                        alt="LoonaHash Logo"
-                        width={32}
-                        height={32}
-                        className="logo"
-                        priority
-                      />
-                    </a>
-                  </MagneticButton>
-                </FloatingElement>
+                <MagneticButton>
+                  <a href="#home" className="logo-link">
+                    <Image
+                      src="/assets/logo.png"
+                      alt="LoonaHash Logo"
+                      width={32}
+                      height={32}
+                      className="logo"
+                      priority
+                    />
+                  </a>
+                </MagneticButton>
               </div>
 
               {/* Navigation Links */}
