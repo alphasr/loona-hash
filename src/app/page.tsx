@@ -216,7 +216,7 @@ export default function Home() {
 
             {/* Team Section */}
             <ParallaxSection>
-              <section id="team" className="hero-section">
+              <section id="team" className="hero-section team-section">
                 <div className="hero-content">
                   <AnimatedText text="THE TEAM" className="title" />
                   <FloatingElement delay={0.2}>

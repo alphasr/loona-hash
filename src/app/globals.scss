@@ -444,6 +444,9 @@ body {
   .hero-section {
     padding: 1rem;
   }
+  #team.hero-section {
+    justify-content: flex-start;
+  }
   .stats-container {
     padding: 0 1rem;
   }
