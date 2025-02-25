@@ -1,12 +1,8 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Component } from "react";
 import "./gameplay.scss";
 
-interface GameplayProps {
-  isActive?: boolean;
-}
-
-const Gameplay: React.FC<GameplayProps> = ({ isActive = false }) => {
+const Gameplay: React.FC<Component> = () => {
   const [animateIn, setAnimateIn] = useState(false);
   const [activeTab, setActiveTab] = useState("basic");
 
@@ -36,29 +32,6 @@ const Gameplay: React.FC<GameplayProps> = ({ isActive = false }) => {
       rewards: "Earn up to 200 points per day",
     },
   };
-
-  // Card data for earnings section
-  const earningsData = [
-    {
-      title: "Daily Bonus",
-      description: "Claim free earnings every 24 hours.",
-      icon: "🕒",
-      indicator: "Resets in 14:32:08",
-    },
-    {
-      title: "Streak Rewards",
-      description: "Play consistently to unlock bigger bonuses.",
-      icon: "🔥",
-      streakDays: 3,
-      totalDays: 7,
-    },
-    {
-      title: "Leaderboard Prizes",
-      description: "Compete to earn top-tier crypto incentives.",
-      icon: "🏆",
-      rank: 42,
-    },
-  ];
 
   return (
     <div className={`gameplay-page ${animateIn ? "animate-in" : ""}`}>
