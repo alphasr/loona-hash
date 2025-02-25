@@ -1,10 +1,8 @@
 "use client";
-import React, { useState, useEffect, Component } from "react";
+import React, { useState, useEffect } from "react";
 import "./gameplay.scss";
 
-// Define a proper interface for component props
-
-const Gameplay: React.FC<Component> = () => {
+const Gameplay: React.FC = () => {
   const [animateIn, setAnimateIn] = useState(false);
   const [activeTab, setActiveTab] = useState("basic");
 
@@ -36,11 +34,7 @@ const Gameplay: React.FC<Component> = () => {
   };
 
   return (
-    <div
-      className={`gameplay-page ${animateIn ? "animate-in" : ""} ${
-        isActive ? "active" : ""
-      }`}
-    >
+    <div className={`gameplay-page ${animateIn ? "animate-in" : ""} `}>
       <div className="content-wrapper">
         {/* Header Section */}
         <header className="gameplay-header">
