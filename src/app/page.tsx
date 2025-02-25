@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import SplineBackground from "./component/spline/spline";
 import Gameplay from "./component/gameplay/gameplay";
+import RewardsPage from "./component/rewards/rewardsPage"; // New Rewards component
 import {
   ScrollProgressBar,
   ParallaxSection,
@@ -154,7 +155,18 @@ export default function Home() {
                     className="title gradient-text"
                   />
                   <FloatingElement>
-                    <p className="description">Mining Simulation Game</p>
+                    <p className="description">
+                      Experience the next evolution in mining simulation on
+                      Telegram. With LoonaHash, you can start for free and
+                      unlock a suite of powerful boosts. Complete daily tasks,
+                      earn valuable points, and watch your mining efforts pay
+                      off.
+                    </p>
+                    <p className="description">
+                      Our app combines a fun, competitive mining simulation with
+                      quarterly reward redistribution based on leaderboard
+                      performance—so every bit of effort counts.
+                    </p>
                   </FloatingElement>
                 </div>
               </section>
@@ -169,19 +181,10 @@ export default function Home() {
               </section>
             </ParallaxSection>
 
-            {/* Rewards Section */}
+            {/* Rewards Section using new RewardsPage component */}
             <ParallaxSection>
               <section id="rewards" className="hero-section">
-                <div className="hero-content">
-                  <AnimatedText text="REWARDS" className="title" />
-                  <FloatingElement delay={0.2}>
-                    <p className="description">
-                      Be the first to find the perfect hash.
-                      <br />
-                      Claim your rewards instantly.
-                    </p>
-                  </FloatingElement>
-                </div>
+                <RewardsPage />
               </section>
             </ParallaxSection>
 
@@ -192,7 +195,11 @@ export default function Home() {
                   <AnimatedText text="STATS" className="title" />
                   <FloatingElement delay={0.2}>
                     <p className="description">
-                      Track your progress and network growth
+                      Monitor your progress in real time—track monthly active
+                      users, community growth, and token holdings. These
+                      transparent metrics allow you to see how the LoonaHash
+                      ecosystem is expanding, and where you stand in the
+                      competitive mining landscape.
                     </p>
                   </FloatingElement>
                   <div className="stats-container">
@@ -213,7 +220,13 @@ export default function Home() {
                 <div className="hero-content">
                   <AnimatedText text="THE TEAM" className="title" />
                   <FloatingElement delay={0.2}>
-                    <p className="description">14 Visionaries</p>
+                    <p className="description">
+                      Meet the 14 visionaries behind LoonaHash—a blend of core
+                      developers, product designers, and growth specialists, all
+                      committed to redefining simulation mining. With years of
+                      combined experience, our team is dedicated to innovation
+                      and community success.
+                    </p>
                   </FloatingElement>
                   <div className="stats-container">
                     <AnimatedStatCard value="3" label="Core Developers" />
@@ -230,7 +243,7 @@ export default function Home() {
             <div className="footer-content">
               <div className="footer-section">
                 <h3 className="footer-title">About</h3>
-                <p>Discover the future of mining simulation</p>
+                <p>Discover the future of mining simulation with LoonaHash.</p>
               </div>
 
               <div className="footer-section">

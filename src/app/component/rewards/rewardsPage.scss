@@ -1,0 +1,553 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+// =========================
+// Rewards Page Styles
+// =========================
+
+.rewards-page {
+  position: relative;
+  min-height: 100vh;
+  padding: 2.5rem;
+  color: map-get($colors, text, light);
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    darken(map-get($colors, background), 5%) 0%,
+    map-get($colors, background) 100%
+  );
+
+  .content-wrapper {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: auto;
+    padding: 2rem;
+  }
+
+  // Header section with improved layout
+  .rewards-header {
+    margin-bottom: 2.5rem;
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+
+      .text-content {
+        flex: 1;
+
+        .title {
+          font-size: 2.8rem;
+          font-weight: 800;
+          margin-bottom: 1rem;
+          color: map-get($colors, purple, primary);
+          text-shadow: 0px 0px 15px rgba(160, 110, 255, 0.6);
+          letter-spacing: 1px;
+        }
+
+        .description {
+          font-size: 1.1rem;
+          max-width: 700px;
+          line-height: 1.6;
+          color: map-get($colors, text, gray);
+          opacity: 0.9;
+        }
+      }
+
+      .points-counter {
+        background: linear-gradient(
+          135deg,
+          map-get($colors, purple, primary) 0%,
+          map-get($colors, purple, dark) 100%
+        );
+        padding: 1.5rem;
+        border-radius: 12px;
+        text-align: center;
+        min-width: 180px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        animation: pulse 2s infinite ease-in-out;
+
+        .points-value {
+          display: block;
+          font-size: 2.4rem;
+          font-weight: bold;
+          margin-bottom: 0.25rem;
+          color: white;
+        }
+
+        .points-label {
+          font-size: 1rem;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          color: rgba(255, 255, 255, 0.8);
+        }
+      }
+    }
+
+    // User progress section
+    .user-progress {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-top: 1.5rem;
+
+      .progress-container {
+        margin-bottom: 0.75rem;
+
+        .progress-label {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 0.5rem;
+          font-size: 0.9rem;
+          color: map-get($colors, text, gray);
+        }
+
+        .progress-track {
+          width: 100%;
+          height: 8px;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 4px;
+          overflow: hidden;
+
+          .progress-fill {
+            height: 100%;
+            background: linear-gradient(
+              90deg,
+              map-get($colors, purple, light) 0%,
+              map-get($colors, purple, primary) 100%
+            );
+            border-radius: 4px;
+            transition: width 0.5s ease;
+          }
+        }
+      }
+
+      .next-reward {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.9rem;
+        color: map-get($colors, text, gray);
+
+        .small-button {
+          background-color: rgba(map-get($colors, purple, primary), 0.3);
+          border: 1px solid map-get($colors, purple, primary);
+          color: white;
+          padding: 0.4rem 0.8rem;
+          border-radius: 4px;
+          font-size: 0.8rem;
+          cursor: pointer;
+          transition: all 0.2s ease;
+
+          &:hover {
+            background-color: rgba(map-get($colors, purple, primary), 0.5);
+          }
+        }
+      }
+    }
+  }
+
+  // Rewards navigation
+  .rewards-nav {
+    margin-bottom: 2rem;
+
+    ul {
+      display: flex;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+      li {
+        margin-right: 2rem;
+
+        &.active button {
+          color: map-get($colors, purple, light);
+          border-bottom: 3px solid map-get($colors, purple, primary);
+        }
+
+        button {
+          background: none;
+          border: none;
+          color: map-get($colors, text, gray);
+          padding: 0.75rem 0.25rem;
+          font-size: 1.1rem;
+          position: relative;
+          border-bottom: 3px solid transparent;
+          transition: all 0.3s ease;
+
+          &:hover {
+            color: white;
+          }
+        }
+      }
+    }
+  }
+
+  // Rewards main content
+  .rewards-main {
+    .rewards-container {
+      @include flex(row, space-between, stretch, 1.5rem);
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+
+      .reward-card {
+        background: rgba(30, 30, 40, 0.6);
+        padding: 1.75rem;
+        border-radius: 16px;
+        flex: 1 1 280px;
+        max-width: 350px;
+        @include glass-effect;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 1.5rem;
+        text-align: left;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 4px;
+          background: linear-gradient(
+            90deg,
+            map-get($colors, purple, light) 0%,
+            map-get($colors, purple, primary) 100%
+          );
+        }
+
+        &:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+          background: rgba(40, 40, 55, 0.8);
+        }
+
+        .reward-icon {
+          margin-bottom: 1rem;
+          font-size: 1.8rem;
+          color: map-get($colors, purple, light);
+        }
+
+        .reward-title {
+          font-size: 1.4rem;
+          font-weight: bold;
+          margin-bottom: 0.75rem;
+          color: white;
+        }
+
+        .reward-description {
+          font-size: 0.95rem;
+          color: map-get($colors, text, gray);
+          line-height: 1.5;
+          margin-bottom: 1.5rem;
+          min-height: 3em;
+        }
+
+        .cta-button {
+          width: 100%;
+          background: linear-gradient(
+            90deg,
+            map-get($colors, purple, primary) 0%,
+            darken(map-get($colors, purple, primary), 10%) 100%
+          );
+          border: none;
+          color: white;
+          padding: 0.8rem 1.25rem;
+          border-radius: 8px;
+          font-size: 1rem;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 10px rgba(map-get($colors, purple, primary), 0.3);
+
+          &:hover {
+            background: linear-gradient(
+              90deg,
+              lighten(map-get($colors, purple, primary), 5%) 0%,
+              map-get($colors, purple, primary) 100%
+            );
+            box-shadow: 0 6px 15px rgba(map-get($colors, purple, primary), 0.4);
+          }
+
+          &:active {
+            transform: translateY(2px);
+          }
+        }
+      }
+    }
+
+    // Recently earned rewards section
+    .recent-rewards {
+      background: rgba(30, 30, 40, 0.4);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-top: 1rem;
+
+      h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        color: white;
+      }
+
+      .reward-history {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0.8rem 0;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          .reward-time {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            width: 20%;
+          }
+
+          .reward-name {
+            font-size: 1rem;
+            color: white;
+            flex: 1;
+          }
+
+          .reward-amount {
+            font-size: 0.95rem;
+            font-weight: bold;
+            color: map-get($colors, green, primary);
+          }
+        }
+      }
+    }
+  }
+}
+
+// Animation keyframes
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(map-get($colors, purple, primary), 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(map-get($colors, purple, primary), 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(map-get($colors, purple, primary), 0);
+  }
+}
+
+// Additional animation for floating elements
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.floating-element {
+  animation: float 4s ease-in-out infinite;
+}
+
+// Loading spinner animation
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(map-get($colors, purple, primary), 0.2);
+  border-top: 5px solid map-get($colors, purple, primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// Page transition animation
+.page-transition {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+// Scroll progress bar
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    map-get($colors, purple, light) 0%,
+    map-get($colors, purple, primary) 100%
+  );
+  z-index: 1000;
+  width: var(--scroll-width, 0%);
+}
+
+// =========================
+// Responsive Adjustments
+// =========================
+
+@include responsive(tablet) {
+  .rewards-page {
+    padding: 1.5rem;
+
+    .rewards-header {
+      .header-content {
+        flex-direction: column;
+
+        .text-content {
+          width: 100%;
+          margin-bottom: 1.5rem;
+
+          .title {
+            font-size: 2.2rem;
+            text-align: center;
+          }
+
+          .description {
+            font-size: 1rem;
+            text-align: center;
+            margin: 0 auto;
+          }
+        }
+
+        .points-counter {
+          margin: 0 auto;
+          width: 70%;
+        }
+      }
+    }
+
+    .rewards-nav {
+      overflow-x: auto;
+
+      ul {
+        min-width: min-content;
+
+        li {
+          margin-right: 1.5rem;
+
+          button {
+            white-space: nowrap;
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+
+    .rewards-main {
+      .rewards-container {
+        justify-content: center;
+
+        .reward-card {
+          min-width: 280px;
+        }
+      }
+    }
+  }
+}
+
+@include responsive(mobile) {
+  .rewards-page {
+    padding: 1rem;
+
+    .content-wrapper {
+      padding: 1rem;
+    }
+
+    .rewards-header {
+      .header-content {
+        .text-content {
+          .title {
+            font-size: 1.8rem;
+          }
+
+          .description {
+            font-size: 0.9rem;
+          }
+        }
+
+        .points-counter {
+          width: 100%;
+
+          .points-value {
+            font-size: 2rem;
+          }
+        }
+      }
+
+      .user-progress {
+        .next-reward {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.5rem;
+        }
+      }
+    }
+
+    .rewards-nav {
+      ul {
+        li {
+          margin-right: 1rem;
+
+          button {
+            font-size: 0.9rem;
+            padding: 0.5rem 0.15rem;
+          }
+        }
+      }
+    }
+
+    .rewards-main {
+      .recent-rewards {
+        .reward-history {
+          li {
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0.6rem 0;
+
+            .reward-time,
+            .reward-name,
+            .reward-amount {
+              width: 100%;
+              margin-bottom: 0.25rem;
+            }
+
+            .reward-time {
+              font-size: 0.8rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}

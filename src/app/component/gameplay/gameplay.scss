@@ -1,85 +1,258 @@
 @import "../../styles/variables";
 @import "../../styles/mixins";
 
+.gameplay-earnings-wrapper {
+  @include flex(row, flex-start, flex-start, 4rem);
+  padding: 3rem;
+  max-width: map-get($breakpoints, desktop);
+  margin: auto;
+  width: 100%;
+  perspective: 1000px;
+
+  @include responsive(laptop) {
+    padding: 2.5rem;
+    gap: 3rem;
+  }
+
+  @include responsive(tablet) {
+    @include flex(column, center, center, 2.5rem);
+    padding: 2rem;
+  }
+
+  @include responsive(mobile) {
+    padding: 1.5rem;
+    gap: 2rem;
+  }
+
+  @include responsive(small) {
+    padding: 1rem;
+  }
+}
+
 .hero-section.gameplay {
-  min-height: calc(100vh - 220px);
-  @include flex(column);
-  padding: 2rem;
-  transition: padding 0.3s ease;
+  flex: 1;
+  width: 100%;
+  @include flex(column, flex-start, flex-start);
+  transform-style: preserve-3d;
+
+  .hero-content {
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+
+    @include responsive(tablet) {
+      text-align: center;
+      padding: 0 1rem;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      background: map-get($colors, overlay, purple);
+      filter: blur(20px);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    &:hover::after {
+      opacity: 0.1;
+    }
+  }
 
   .title {
-    font-size: 5rem;
+    font-size: 4rem;
     font-weight: bold;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     color: map-get($colors, purple, primary);
-    transition: font-size 0.3s ease;
+    line-height: 1.2;
+    transform-style: preserve-3d;
+
+    @include responsive(laptop) {
+      font-size: 3.5rem;
+    }
+
+    @include responsive(tablet) {
+      font-size: 3rem;
+    }
+
+    @include responsive(mobile) {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    @include responsive(small) {
+      font-size: 2rem;
+    }
   }
 
   .description {
     font-size: 1.5rem;
     color: map-get($colors, text, gray);
-    margin-bottom: 2rem;
     line-height: 1.6;
-    transition: font-size 0.3s ease;
-  }
-}
+    transform-style: preserve-3d;
 
-// Responsive styles for gameplay section
-@include responsive(laptop) {
-  .hero-section.gameplay {
-    .title {
-      font-size: 4rem;
-    }
-  }
-}
-
-@include responsive(tablet) {
-  .hero-section.gameplay {
-    min-height: calc(100vh - 70px);
-    padding: 1.5rem;
-
-    .title {
-      font-size: 3rem;
+    @include responsive(laptop) {
+      font-size: 1.35rem;
     }
 
-    .description {
+    @include responsive(tablet) {
       font-size: 1.25rem;
-    }
-  }
-}
-
-@include responsive(mobile) {
-  .hero-section.gameplay {
-    min-height: calc(100vh - 78px);
-    padding: 1rem;
-
-    .title {
-      font-size: 2.5rem;
+      br {
+        display: none;
+      }
     }
 
-    .description {
+    @include responsive(mobile) {
       font-size: 1.1rem;
-      margin-bottom: 1.5rem;
-    }
-  }
-}
-
-@include responsive(small) {
-  .hero-section.gameplay {
-    .title {
-      font-size: 2rem;
     }
 
-    .description {
+    @include responsive(small) {
       font-size: 1rem;
     }
   }
 }
 
-// Landscape mode adjustments
-@media screen and (max-height: 600px) and (orientation: landscape) {
-  .hero-section.gameplay {
-    padding: 3rem 1rem;
-    min-height: auto;
+.earnings-section {
+  flex: 1;
+  width: 100%;
+  @include flex(column, flex-start, flex-start);
+  transform-style: preserve-3d;
+
+  @include responsive(tablet) {
+    align-items: center;
+    text-align: center;
+  }
+
+  .title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: map-get($colors, purple, light);
+    line-height: 1.2;
+    transform-style: preserve-3d;
+
+    @include responsive(laptop) {
+      font-size: 2.75rem;
+    }
+
+    @include responsive(tablet) {
+      font-size: 2.5rem;
+    }
+
+    @include responsive(mobile) {
+      font-size: 2.25rem;
+      margin-bottom: 1rem;
+    }
+
+    @include responsive(small) {
+      font-size: 2rem;
+    }
+  }
+
+  .description {
+    font-size: 1.3rem;
+    color: map-get($colors, text, gray);
+    max-width: 600px;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    transform-style: preserve-3d;
+
+    @include responsive(laptop) {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    @include responsive(tablet) {
+      font-size: 1.15rem;
+      br {
+        display: none;
+      }
+    }
+
+    @include responsive(mobile) {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .earnings-container {
+    @include flex(column, flex-start, flex-start, 1.5rem);
+    width: 100%;
+    max-width: 600px;
+    transform-style: preserve-3d;
+
+    @include responsive(mobile) {
+      gap: 1rem;
+    }
+  }
+
+  .earning-card {
+    background: map-get($colors, overlay, glass);
+    padding: 1.75rem;
+    border-radius: 12px;
+    width: 100%;
+    @include glass-effect;
+    transform-style: preserve-3d;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        45deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.05) 50%,
+        transparent 100%
+      );
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+
+    &:hover::before {
+      transform: translateX(100%);
+    }
+
+    @include responsive(laptop) {
+      padding: 1.5rem;
+    }
+
+    @include responsive(mobile) {
+      padding: 1.25rem;
+    }
+
+    .earning-title {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-bottom: 0.75rem;
+      color: map-get($colors, text, light);
+      transform-style: preserve-3d;
+
+      @include responsive(mobile) {
+        font-size: 1.15rem;
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    .earning-description {
+      font-size: 1rem;
+      color: map-get($colors, text, gray);
+      line-height: 1.5;
+      transform-style: preserve-3d;
+
+      @include responsive(mobile) {
+        font-size: 0.95rem;
+      }
+    }
   }
 }

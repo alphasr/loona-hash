@@ -1,4 +1,7 @@
+// =========================
 // Variables
+// =========================
+
 $colors: (
   background: #000,
   purple: (
@@ -30,8 +33,10 @@ $breakpoints: (
 $nav-height: 60px;
 $footer-height: 60px;
 
+// =========================
 // Mixins
-// Mixins
+// =========================
+
 @mixin flex($direction: row, $justify: center, $align: center, $gap: 0) {
   display: flex;
   flex-direction: $direction;
@@ -55,7 +60,10 @@ $footer-height: 60px;
   }
 }
 
+// =========================
 // Reset & Base Styles
+// =========================
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -75,7 +83,10 @@ body {
   font-family: var(--font-geist-sans);
 }
 
+// =========================
 // Layout
+// =========================
+
 .page-wrapper {
   min-height: 100vh;
   display: flex;
@@ -105,7 +116,10 @@ body {
   padding-bottom: $footer-height;
 }
 
+// =========================
 // Navigation
+// =========================
+
 .nav {
   position: fixed;
   top: 0;
@@ -116,7 +130,7 @@ body {
   border-bottom: 1px solid map-get($colors, text, off-white);
   z-index: 1000;
   @include glass-effect;
-  overflow: hidden; // Prevent horizontal scroll
+  overflow: hidden;
 
   &-content {
     max-width: map-get($breakpoints, wide);
@@ -124,12 +138,10 @@ body {
     height: 100%;
     padding: 0 clamp(1rem, 5vw, 2rem);
     @include flex(row, space-between, center);
-    position: relative;
   }
 
   &-logo {
     flex-shrink: 0;
-    position: relative;
     padding: 4px;
     margin-right: 0.5rem;
 
@@ -160,7 +172,7 @@ body {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    width: max-content; // Ensure list takes only needed width
+    width: max-content;
     padding: 0 0.5rem;
   }
 
@@ -199,14 +211,20 @@ body {
   }
 }
 
+// =========================
 // Main Content
+// =========================
+
 .main {
   padding-top: $nav-height;
   @include flex(column, flex-start, center);
   gap: 32px;
 }
 
+// =========================
 // Hero Section
+// =========================
+
 .hero-section {
   min-height: calc(100vh - #{$nav-height});
   @include flex(column);
@@ -247,7 +265,10 @@ body {
   line-height: 1.6;
 }
 
+// =========================
 // Stats Cards
+// =========================
+
 .stats-container {
   @include flex(row, center, stretch, clamp(1rem, 3vw, 2rem));
   margin: 0 auto;
@@ -281,7 +302,10 @@ body {
   }
 }
 
+// =========================
 // Footer
+// =========================
+
 .footer {
   position: fixed;
   bottom: 0;
@@ -353,7 +377,10 @@ body {
   }
 }
 
+// =========================
 // Animations
+// =========================
+
 @keyframes slideDown {
   from {
     opacity: 0;
@@ -365,30 +392,29 @@ body {
   }
 }
 
+// =========================
 // Responsive Styles
+// =========================
+
 @media (max-width: map-get($breakpoints, tablet)) {
   .nav {
     &-content {
       padding: 0 0.5rem;
       justify-content: flex-start;
     }
-
     .nav-list {
       gap: 0.5rem;
       padding: 0 0.25rem;
     }
-
     &-button {
       padding: 4px;
       font-size: 0.75rem;
     }
   }
-
   .stats-container {
     flex-direction: column;
     align-items: center;
   }
-
   .footer-content {
     grid-template-columns: repeat(2, 1fr);
     gap: 0.5rem;
@@ -399,45 +425,37 @@ body {
   .nav {
     &-logo {
       padding: 2px;
-
       .logo {
         width: 24px !important;
         height: 24px !important;
       }
     }
-
     .nav-list {
       position: relative;
       left: auto;
       transform: none;
       margin-left: 0.5rem;
     }
-
     &-button {
       font-size: 0.7rem;
       letter-spacing: 0;
     }
   }
-
   .hero-section {
     padding: 1rem;
   }
-
   .stats-container {
     padding: 0 1rem;
   }
-
   .footer {
     &-content {
       grid-template-columns: 1fr;
       text-align: center;
       gap: 0.5rem;
     }
-
     &-section {
       align-items: center;
     }
-
     &-links {
       justify-content: center;
       gap: 0.75rem;
