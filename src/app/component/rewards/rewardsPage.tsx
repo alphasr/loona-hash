@@ -53,7 +53,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ percentage, label }) => (
 const RewardsPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [activeTab, setActiveTab] = useState<string>("daily");
-  const [userPoints, setUserPoints] = useState<number>(2450);
+  const userPoints = 1250;
 
   // Simulate initial loading
   useEffect(() => {
