@@ -36,7 +36,7 @@ const sections: Section[] = [
 ];
 
 const socialLinks = [
-  { name: "Twitter", url: "#", id: "twitter" },
+  { name: "X", url: "https://x.com/LoonaHash_Off", id: "twitter" },
   {
     name: "Instagram",
     url: "https://www.instagram.com/loonahash/",
