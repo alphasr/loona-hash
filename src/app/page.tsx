@@ -42,7 +42,7 @@ const socialLinks = [
     url: "https://www.instagram.com/loonahash/",
     id: "instagram",
   },
-  { name: "Telegram", url: "#", id: "telegram" },
+  { name: "Telegram", url: "https://t.me/LoonaHash_bot", id: "telegram" },
 ];
 
 const resourceLinks = [
