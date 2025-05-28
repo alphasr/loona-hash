@@ -92,9 +92,10 @@ body {
   display: flex;
   flex-direction: column;
   position: relative;
+  padding: 0 clamp(1rem, 5vw, 4rem); // Added consistent horizontal padding
 
   &::before {
-    content: "";
+    content: '';
     position: fixed;
     inset: 0;
     background: linear-gradient(
@@ -111,9 +112,10 @@ body {
 .content-wrapper {
   flex: 1;
   width: 100%;
+  max-width: map-get($breakpoints, wide); // Ensure content is constrained
+  margin: 0 auto; // Center the content
   position: relative;
   z-index: 2;
-  padding-bottom: $footer-height;
 }
 
 // =========================
@@ -127,7 +129,6 @@ body {
   width: 100%;
   height: $nav-height;
   background-color: map-get($colors, overlay, dark);
-  border-bottom: 1px solid map-get($colors, text, off-white);
   z-index: 1000;
   @include glass-effect;
   overflow: hidden;
@@ -136,7 +137,6 @@ body {
     max-width: map-get($breakpoints, wide);
     margin: 0 auto;
     height: 100%;
-    padding: 0 clamp(1rem, 5vw, 2rem);
     @include flex(row, space-between, center);
   }
 
@@ -190,7 +190,7 @@ body {
     position: relative;
 
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       bottom: -2px;
       left: 50%;
@@ -219,6 +219,7 @@ body {
   padding-top: $nav-height;
   @include flex(column, flex-start, center);
   gap: 32px;
+  width: 100%; // Ensure main takes full width of its container
 }
 
 // =========================
@@ -228,7 +229,6 @@ body {
 .hero-section {
   min-height: calc(100vh - #{$nav-height});
   @include flex(column);
-  padding: clamp(1rem, 5vw, 2rem);
   width: 100%;
 
   &.home .title {
@@ -244,7 +244,6 @@ body {
 }
 
 .hero-content {
-  max-width: map-get($breakpoints, wide);
   width: 100%;
   text-align: center;
   @include flex(column, center, center, clamp(1rem, 3vw, 2rem));
@@ -273,8 +272,6 @@ body {
   @include flex(row, center, stretch, clamp(1rem, 3vw, 2rem));
   margin: 0 auto;
   width: 100%;
-  max-width: map-get($breakpoints, wide);
-  padding: 0 clamp(1rem, 5vw, 2rem);
   flex-wrap: wrap;
 }
 
@@ -307,19 +304,24 @@ body {
 // =========================
 
 .footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+  // width: 100vw; // Kept, good
   background-color: map-get($colors, overlay, glass);
   @include glass-effect;
   border-top: 1px solid map-get($colors, overlay, purple);
-  z-index: 100;
+
+  // Add robust full-width styling
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  margin-left: -50vw;
 
   &-content {
     max-width: map-get($breakpoints, wide);
     margin: 0 auto;
-    padding: 0.5rem clamp(1rem, 5vw, 2rem);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: clamp(1rem, 5vw, 4rem);
+    padding-right: clamp(1rem, 5vw, 4rem);
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: clamp(0.5rem, 2vw, 1rem);
@@ -348,7 +350,7 @@ body {
     position: relative;
 
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       bottom: -2px;
       left: 0;
@@ -367,13 +369,12 @@ body {
   }
 
   &-bottom {
-    width: 100%;
+    max-width: map-get($breakpoints, wide);
+    margin: 0.5rem auto 0;
     text-align: center;
     color: map-get($colors, text, gray);
-    border-top: 1px solid map-get($colors, overlay, purple);
-    padding: 0.25rem 0;
+    padding: 0.5rem clamp(1rem, 5vw, 4rem);
     font-size: clamp(0.7rem, 1.5vw, 0.8rem);
-    margin-top: 0.25rem;
   }
 }
 
@@ -397,6 +398,9 @@ body {
 // =========================
 
 @media (max-width: map-get($breakpoints, tablet)) {
+  .page-wrapper {
+    padding: 0 clamp(1rem, 4vw, 2rem); // Adjust padding for tablets
+  }
   .nav {
     &-content {
       padding: 0 0.5rem;
@@ -415,13 +419,24 @@ body {
     flex-direction: column;
     align-items: center;
   }
-  .footer-content {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
+  .footer {
+    &-content {
+      padding-left: clamp(1rem, 4vw, 2rem);
+      padding-right: clamp(1rem, 4vw, 2rem);
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem;
+    }
+    &-bottom {
+      padding-left: clamp(1rem, 4vw, 2rem);
+      padding-right: clamp(1rem, 4vw, 2rem);
+    }
   }
 }
 
 @media (max-width: map-get($breakpoints, mobile)) {
+  .page-wrapper {
+    padding: 0 1rem; // Adjust padding for mobile
+  }
   .nav {
     &-logo {
       padding: 2px;
@@ -441,17 +456,13 @@ body {
       letter-spacing: 0;
     }
   }
-  .hero-section {
-    padding: 1rem;
-  }
   #team.hero-section {
     justify-content: flex-start;
   }
-  .stats-container {
-    padding: 0 1rem;
-  }
   .footer {
     &-content {
+      padding-left: 1rem;
+      padding-right: 1rem;
       grid-template-columns: 1fr;
       text-align: center;
       gap: 0.5rem;
@@ -462,6 +473,10 @@ body {
     &-links {
       justify-content: center;
       gap: 0.75rem;
+    }
+    &-bottom {
+      padding-left: 1rem;
+      padding-right: 1rem;
     }
   }
 }
