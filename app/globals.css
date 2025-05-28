@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .animate-rainbow-text {
+    @apply animate-pulse;
+    background: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: rainbow 3s linear infinite;
+  }
+
+  .animate-rainbow-text-reverse {
+    @apply animate-pulse;
+    background: linear-gradient(to left, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: rainbow 3s linear infinite;
+  }
+
+  .animate-rainbow-bg {
+    background: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+    background-size: 200% auto;
+    animation: rainbow 3s linear infinite;
+  }
+
+  .animate-rainbow-border {
+    position: relative;
+    background: black;
+    z-index: 0;
+  }
+
+  .animate-rainbow-border::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: -2px;
+    background: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+    background-size: 200% auto;
+    border-radius: 0.5rem;
+    animation: rainbow 3s linear infinite;
+  }
+
+  .animate-border-glow {
+    position: relative;
+    background: rgba(30, 30, 30, 0.5);
+    backdrop-filter: blur(10px);
+    z-index: 0;
+    border-radius: 1rem;
+  }
+
+  .animate-border-glow::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: -2px;
+    background: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+    background-size: 200% auto;
+    border-radius: 1.2rem;
+    animation: rainbow 3s linear infinite;
+  }
+
+  .animate-float-astronaut {
+    animation: float 10s ease-in-out infinite;
+  }
+
+  .animate-spin-slow {
+    animation: spin 10s linear infinite;
+  }
+
+  .animate-spin-reverse {
+    animation: spin-reverse 8s linear infinite;
+  }
+
+  .animate-bounce-slow {
+    animation: bounce 3s infinite;
+  }
+
+  .animate-gradient-x {
+    animation: gradient-x 15s ease infinite;
+    background-size: 400% 400%;
+  }
+}
+
+@keyframes rainbow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(10deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-reverse {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes gradient-x {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
