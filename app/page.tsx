@@ -1,7 +1,6 @@
 'use client';
-
-import { useState, useEffect, useRef } from 'react';
-import { Button } from '@/components/ui/button';
+import React, { useState, useEffect, useRef } from 'react';
+import { Button } from '@/components/ui/button'; // Added import for Button
 import { Input } from '@/components/ui/input';
 import {
   ArrowRight,
@@ -20,6 +19,410 @@ import {
   Pizza,
   Laugh,
 } from 'lucide-react';
+import Link from 'next/link'; // Import Link
+
+// Define the Terms and Conditions content directly for the modal
+const TermsAndConditionsContent = () => (
+  <div className='prose prose-sm prose-invert max-w-full p-1 bg-gray-800 text-gray-300 rounded-lg shadow-xl my-2'>
+    <h1 className='text-xl font-bold text-purple-400 mb-3'>
+      LOONAHASH TERMS AND CONDITIONS
+    </h1>
+    <p className='text-xs font-bold text-red-400'>
+      IMPORTANT: PLEASE READ THESE TERMS CAREFULLY. BY USING LOONAHASH, YOU
+      AGREE TO BE LEGALLY BOUND BY THESE TERMS. IF YOU DO NOT AGREE, DO NOT USE
+      THE APP.
+    </p>
+    <h2 className='text-lg font-semibold text-purple-300 mt-4 mb-2'>
+      1. INTRODUCTION AND ACCEPTANCE
+    </h2>
+    <p className='text-xs'>
+      These Terms and Conditions ("Terms") constitute a legally binding
+      agreement between you ("User," "you," or "your") and Loonahash Limited
+      ("Company," "we," "us," or "our") governing your use of the Loonahash
+      application ("App"), a Telegram mini-app that provides cryptocurrency
+      mining simulation services.
+    </p>
+    <p className='text-xs'>
+      <strong>
+        BY ACCESSING OR USING THE APP, YOU ACKNOWLEDGE THAT YOU HAVE READ,
+        UNDERSTOOD, AND AGREE TO BE BOUND BY THESE TERMS. YOUR USE OF THE APP
+        CONSTITUTES ACCEPTANCE OF THESE TERMS AND YOUR AGREEMENT TO COMPLY WITH
+        THEM.
+      </strong>
+    </p>
+    <h2 className='text-lg font-semibold text-purple-300 mt-4 mb-2'>
+      2. DEFINITIONS
+    </h2>
+    <p className='text-xs'>For the purposes of these Terms:</p>
+    <ol className='list-decimal list-inside space-y-1 text-xs'>
+      <li>
+        <strong>"App"</strong> means Loonahash, including all its features,
+        functionalities, and services
+      </li>
+      <li>
+        <strong>"Misuse"</strong> includes but is not limited to: unauthorized
+        access, manipulation, hacking, exploiting, reverse engineering, data
+        scraping, bot usage, multiple account creation, or any action that
+        violates these Terms
+      </li>
+      <li>
+        <strong>"Damages"</strong> means any and all losses, liabilities,
+        damages, costs, and expenses (including legal fees)
+      </li>
+      <li>
+        <strong>"Intellectual Property"</strong> means all patents, trademarks,
+        copyrights, trade secrets, and other proprietary rights
+      </li>
+    </ol>
+    <h2 className='text-lg font-semibold text-purple-300 mt-4 mb-2'>
+      3. ABSOLUTE DISCLAIMER OF LIABILITY
+    </h2>
+    <p className='text-xs'>
+      <strong>
+        THE COMPANY, ITS OFFICERS, DIRECTORS, EMPLOYEES, AGENTS, PARTNERS, AND
+        AFFILIATES SHALL HAVE NO LIABILITY WHATSOEVER TO YOU OR ANY THIRD PARTY
+        FOR ANY CLAIM, LOSS, DAMAGE, OR EXPENSE ARISING FROM OR RELATED TO YOUR
+        USE OF THE APP, REGARDLESS OF THE CAUSE OR THEORY OF LIABILITY,
+        INCLUDING BUT NOT LIMITED TO:
+      </strong>
+    </p>
+    <ul className='list-disc list-inside space-y-1 text-xs'>
+      <li>
+        Any direct, indirect, incidental, special, consequential, or punitive
+        damages
+      </li>
+      <li>Lost profits, lost data, or business interruption</li>
+      <li>Personal injury or property damage</li>
+      <li>
+        Unauthorized access to or alteration of your transmissions or data
+      </li>
+      <li>Statements or conduct of any third party on the App</li>
+      <li>Any bugs, viruses, trojan horses, or similar harmful components</li>
+      <li>Any errors, mistakes, or inaccuracies in content</li>
+      <li>Your failure to comply with applicable laws and regulations</li>
+      <li>Market volatility or cryptocurrency value fluctuations</li>
+      <li>Wallet security breaches or transaction failures</li>
+    </ul>
+    <p className='text-xs'>
+      <strong>
+        THIS DISCLAIMER APPLIES EVEN IF THE COMPANY HAS BEEN ADVISED OF THE
+        POSSIBILITY OF SUCH DAMAGES. YOUR SOLE REMEDY FOR DISSATISFACTION WITH
+        THE APP IS TO STOP USING IT.
+      </strong>
+    </p>
+    <h2 className='text-lg font-semibold text-purple-300 mt-4 mb-2'>
+      4. INDEMNIFICATION AND HOLD HARMLESS
+    </h2>
+    <p className='text-xs'>
+      <strong>
+        YOU AGREE TO INDEMNIFY, DEFEND, AND HOLD HARMLESS THE COMPANY AND ITS
+        OFFICERS, DIRECTORS, EMPLOYEES, AGENTS, LICENSORS, SUPPLIERS, AND ANY
+        THIRD-PARTY INFORMATION PROVIDERS FROM AND AGAINST ALL CLAIMS, LOSSES,
+        DAMAGES, EXPENSES, AND COSTS (INCLUDING ATTORNEYS\' FEES) ARISING FROM:
+      </strong>
+    </p>
+    <ol className='list-decimal list-inside space-y-1 text-xs'>
+      <li>Your use or misuse of the App</li>
+      <li>Your violation of these Terms</li>
+      <li>Your violation of any law or regulation</li>
+      <li>Your infringement of any third-party rights</li>
+      <li>Any content you submit, post, or transmit through the App</li>
+      <li>Your negligent or intentional misconduct</li>
+      <li>Any unauthorized access using your account</li>
+    </ol>
+    <p className='text-xs'>
+      <strong>
+        This indemnification obligation will survive the termination of these
+        Terms and your use of the App.
+      </strong>
+    </p>
+    <h2 className='text-lg font-semibold text-purple-300 mt-4 mb-2'>
+      5. PROHIBITED ACTIVITIES AND PENALTIES
+    </h2>
+    <h3 className='text-md font-semibold text-purple-200 mt-3 mb-1'>
+      5.1 Strict Prohibitions
+    </h3>
+    <p className='text-xs'>You are strictly prohibited from:</p>
+    <ol className='list-decimal list-inside space-y-2 text-xs'>
+      <li>
+        <strong>Technical Violations:</strong>
+        <ul className='list-disc list-inside ml-3 space-y-0.5 mt-0.5'>
+          <li>
+            Using automated systems, bots, scripts, or any software to interact
+            with the App
+          </li>
+          <li>
+            Attempting to hack, crack, or otherwise compromise the App\'s
+            security
+          </li>
+          <li>
+            Reverse engineering, decompiling, or disassembling any part of the
+            App
+          </li>
+          <li>Creating multiple accounts or false identities</li>
+          <li>
+            Manipulating or attempting to manipulate the leaderboard or reward
+            system
+          </li>
+          <li>Exploiting bugs or vulnerabilities instead of reporting them</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Legal Violations:</strong>
+        <ul className='list-disc list-inside ml-3 space-y-0.5 mt-0.5'>
+          <li>
+            Using the App for any illegal purpose or in violation of any laws
+          </li>
+          <li>Engaging in fraud, money laundering, or terrorist financing</li>
+          <li>Violating intellectual property rights</li>
+          <li>Harassing, threatening, or harming other users</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Commercial Violations:</strong>
+        <ul className='list-disc list-inside ml-3 space-y-0.5 mt-0.5'>
+          <li>Selling, trading, or commercializing your account</li>
+          <li>Operating a service that interferes with the App</li>
+          <li>Collecting or harvesting user data</li>
+        </ul>
+      </li>
+    </ol>
+    <h3 className='text-md font-semibold text-purple-200 mt-3 mb-1'>
+      5.2 Penalties for Violations
+    </h3>
+    <p className='text-xs'>
+      <strong>
+        IF YOU VIOLATE THESE TERMS, THE COMPANY MAY, IN ITS SOLE DISCRETION:
+      </strong>
+    </p>
+    <ol className='list-decimal list-inside space-y-1 text-xs'>
+      <li>
+        <strong>Immediately terminate your account without notice</strong>
+      </li>
+      <li>
+        <strong>Forfeit all accumulated rewards and virtual assets</strong>
+      </li>
+      <li>
+        <strong>
+          Ban you permanently from the App and all Company services
+        </strong>
+      </li>
+      <li>
+        <strong>Report violations to law enforcement authorities</strong>
+      </li>
+      <li>
+        <strong>Pursue legal action against you</strong>
+      </li>
+    </ol>
+    <h3 className='text-md font-semibold text-purple-200 mt-3 mb-1'>
+      5.3 Liquidated Damages
+    </h3>
+    <p className='text-xs'>
+      <strong>
+        YOU ACKNOWLEDGE AND AGREE THAT ANY MISUSE OF THE APP CAUSES SUBSTANTIAL
+        HARM TO THE COMPANY THAT WOULD BE DIFFICULT TO QUANTIFY. THEREFORE, FOR
+        EACH INSTANCE OF MISUSE, YOU AGREE TO PAY LIQUIDATED DAMAGES OF:
+      </strong>
+    </p>
+    <ul className='list-disc list-inside space-y-1 text-xs'>
+      <li>
+        <strong>$50,000 USD</strong> for each instance of unauthorized access or
+        hacking attempt
+      </li>
+      <li>
+        <strong>$25,000 USD</strong> for each instance of bot usage or
+        automation
+      </li>
+      <li>
+        <strong>$100,000 USD</strong> for reverse engineering or distributing
+        App code
+      </li>
+      <li>
+        <strong>$10,000 USD</strong> for each unauthorized multiple account
+        created
+      </li>
+      <li>
+        <strong>$250,000 USD</strong> for any activity that compromises the
+        App\'s security or other users\' data
+      </li>
+    </ul>
+    <p className='text-xs'>
+      <strong>
+        These amounts are not penalties but reasonable estimates of damages. The
+        Company reserves the right to seek additional actual damages.
+      </strong>
+    </p>
+    <h2 className='text-lg font-semibold text-purple-300 mt-4 mb-2'>
+      6. LEGAL ACTION AND ENFORCEMENT
+    </h2>
+    <h3 className='text-md font-semibold text-purple-200 mt-3 mb-1'>
+      6.1 Right to Sue
+    </h3>
+    <p className='text-xs'>
+      <strong>
+        The Company reserves the unlimited right to initiate legal proceedings
+        against any User who:
+      </strong>
+    </p>
+    <ol className='list-decimal list-inside space-y-1 text-xs'>
+      <li>Violates these Terms</li>
+      <li>Engages in any form of Misuse</li>
+      <li>Causes damage to the Company or other users</li>
+      <li>Attempts unauthorized access or hacking</li>
+      <li>Infringes on the Company\'s intellectual property</li>
+    </ol>
+    <h3 className='text-md font-semibold text-purple-200 mt-3 mb-1'>
+      6.2 Costs and Attorneys\' Fees
+    </h3>
+    <p className='text-xs'>
+      <strong>
+        In any legal action arising from your violation of these Terms, you
+        agree to pay all of the Company\'s costs and expenses, including but not
+        limited to:
+      </strong>
+    </p>
+    <ul className='list-disc list-inside space-y-1 text-xs'>
+      <li>Reasonable attorneys\' fees</li>
+      <li>Court costs and filing fees</li>
+      <li>Expert witness fees</li>
+      <li>Investigation costs</li>
+      <li>Collection costs</li>
+    </ul>
+    <h3 className='text-md font-semibold text-purple-200 mt-3 mb-1'>
+      6.3 Injunctive Relief
+    </h3>
+    <p className='text-xs'>
+      The Company may seek immediate injunctive relief without bond to prevent
+      ongoing or threatened violations of these Terms.
+    </p>
+    <h2 className='text-lg font-semibold text-purple-300 mt-4 mb-2'>
+      7. SECURITY DEPOSIT AND COMPLIANCE BOND
+    </h2>
+    <h3 className='text-md font-semibold text-purple-200 mt-3 mb-1'>
+      7.1 Security Measures
+    </h3>
+    <p className='text-xs'>
+      The Company reserves the right to require high-value users or users with
+      suspicious activity to post a security deposit or compliance bond of up to
+      $10,000 USD to continue using the App.
+    </p>
+    <h3 className='text-md font-semibold text-purple-200 mt-3 mb-1'>
+      7.2 Forfeiture
+    </h3>
+    <p className='text-xs'>
+      Such deposits may be forfeited upon any violation of these Terms.
+    </p>
+    <h2 className='text-lg font-semibold text-purple-300 mt-4 mb-2'>
+      8. MONITORING AND INVESTIGATION
+    </h2>
+    <h3 className='text-md font-semibold text-purple-200 mt-3 mb-1'>
+      8.1 Right to Monitor
+    </h3>
+    <p className='text-xs'>
+      <strong>The Company reserves the unlimited right to:</strong>
+    </p>
+    <ol className='list-decimal list-inside space-y-1 text-xs'>
+      <li>Monitor all App usage and user activities</li>
+      <li>Investigate suspected violations</li>
+      <li>Cooperate with law enforcement</li>
+      <li>Use technical measures to detect and prevent Misuse</li>
+      <li>Collect and preserve evidence of violations</li>
+    </ol>
+    <h3 className='text-md font-semibold text-purple-200 mt-3 mb-1'>
+      8.2 No Privacy in Violations
+    </h3>
+    <p className='text-xs'>
+      You have no expectation of privacy regarding any communications or
+      activities that violate these Terms.
+    </p>
+    <h2 className='text-lg font-semibold text-purple-300 mt-4 mb-2'>
+      9. INTELLECTUAL PROPERTY PROTECTION
+    </h2>
+    <h3 className='text-md font-semibold text-purple-200 mt-3 mb-1'>
+      9.1 Ownership
+    </h3>
+    <p className='text-xs'>
+      All intellectual property in the App belongs exclusively to the Company.
+      Any unauthorized use constitutes infringement subject to civil and
+      criminal penalties.
+    </p>
+    <h3 className='text-md font-semibold text-purple-200 mt-3 mb-1'>
+      9.2 Statutory Damages
+    </h3>
+    <p className='text-xs'>
+      For any copyright infringement, you agree to statutory damages of $150,000
+      per work infringed.
+    </p>
+    <h2 className='text-lg font-semibold text-purple-300 mt-4 mb-2'>
+      10. GOVERNING LAW AND JURISDICTION
+    </h2>
+    <h3 className='text-md font-semibold text-purple-200 mt-3 mb-1'>
+      10.1 Applicable Law
+    </h3>
+    <p className='text-xs'>
+      These Terms are governed by the laws of [Jurisdiction], without regard to
+      conflict of law principles.
+    </p>
+    <h3 className='text-md font-semibold text-purple-200 mt-3 mb-1'>
+      10.2 Exclusive Jurisdiction
+    </h3>
+    <p className='text-xs'>
+      You consent to exclusive jurisdiction and venue in the courts of
+      [Jurisdiction] for all disputes.
+    </p>
+    <h3 className='text-md font-semibold text-purple-200 mt-3 mb-1'>
+      10.3 Waiver of Objections
+    </h3>
+    <p className='text-xs'>
+      You waive any objection to jurisdiction, venue, or forum non conveniens.
+    </p>
+    <h2 className='text-lg font-semibold text-purple-300 mt-4 mb-2'>
+      11. CLASS ACTION WAIVER
+    </h2>
+    <p className='text-xs'>
+      <strong>
+        YOU WAIVE ANY RIGHT TO BRING OR PARTICIPATE IN A CLASS ACTION LAWSUIT
+        AGAINST THE COMPANY. ALL CLAIMS MUST BE BROUGHT INDIVIDUALLY.
+      </strong>
+    </p>
+    <h2 className='text-lg font-semibold text-purple-300 mt-4 mb-2'>
+      12. SEVERABILITY AND ENFORCEMENT
+    </h2>
+    <p className='text-xs'>
+      If any provision is deemed invalid, the remaining provisions continue in
+      full force. The Company\'s failure to enforce any provision does not waive
+      its right to do so later.
+    </p>
+    <h2 className='text-lg font-semibold text-purple-300 mt-4 mb-2'>
+      13. ACKNOWLEDGMENT
+    </h2>
+    <p className='text-xs'>
+      <strong>BY USING THE APP, YOU ACKNOWLEDGE THAT:</strong>
+    </p>
+    <ol className='list-decimal list-inside space-y-1 text-xs'>
+      <li>You have read and understood these Terms</li>
+      <li>You agree to be bound by them</li>
+      <li>
+        You understand the significant legal and financial consequences of
+        violations
+      </li>
+      <li>You have consulted with legal counsel if desired</li>
+      <li>You are entering into these Terms voluntarily</li>
+    </ol>
+    <h2 className='text-lg font-semibold text-purple-300 mt-4 mb-2'>
+      14. CONTACT INFORMATION
+    </h2>
+    <p className='text-xs'>For questions about these Terms:</p>
+    <ul className='list-disc list-inside space-y-0.5 text-xs'>
+      <li>Email:loonahashoff@gmail.com</li>
+    </ul>
+    <p className='text-xs font-bold text-red-400 mt-5'>
+      FINAL WARNING: THESE TERMS INCLUDE SIGNIFICANT LIMITATIONS ON LIABILITY
+      AND SUBSTANTIAL PENALTIES FOR VIOLATIONS. IF YOU DO NOT AGREE WITH THESE
+      TERMS, DO NOT USE THE APP.
+    </p>
+  </div>
+);
 
 export default function LoonaHashLanding() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,6 +439,7 @@ export default function LoonaHashLanding() {
     []
   );
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 }); // Added for mouse tracking
+  const [showTermsModal, setShowTermsModal] = useState(false); // State for terms modal
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>(0);
@@ -225,6 +629,11 @@ export default function LoonaHashLanding() {
         }
       }
     }
+  };
+
+  const handleToggleTermsModal = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault(); // Prevent default link behavior if event is passed
+    setShowTermsModal(!showTermsModal);
   };
 
   return (
@@ -1216,7 +1625,11 @@ export default function LoonaHashLanding() {
               <a href='#' className='hover:text-purple-400 transition-colors'>
                 Privacy
               </a>
-              <a href='#' className='hover:text-purple-400 transition-colors'>
+              <a
+                href='#'
+                onClick={handleToggleTermsModal}
+                className='hover:text-purple-400 transition-colors cursor-pointer'
+              >
                 Terms
               </a>
               <a href='#' className='hover:text-purple-400 transition-colors'>
@@ -1229,6 +1642,46 @@ export default function LoonaHashLanding() {
           </div>
         </div>
       </footer>
+
+      {/* Terms and Conditions Modal */}
+      {showTermsModal && (
+        <div className='fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4'>
+          <div className='bg-gray-900/80 border border-purple-700/50 p-1 rounded-xl shadow-2xl w-full max-w-2xl max-h-[80vh] flex flex-col'>
+            <div className='flex justify-between items-center p-3 border-b border-gray-700/50'>
+              <h3
+                className={`text-xl font-bold ${
+                  rainbowMode ? 'animate-rainbow-text' : 'text-purple-300'
+                }`}
+              >
+                Terms and Conditions
+              </h3>
+              <Button
+                variant='ghost'
+                size='sm'
+                onClick={() => handleToggleTermsModal()}
+                className='text-gray-400 hover:text-white hover:bg-purple-700/50'
+              >
+                <X className='w-5 h-5' />
+              </Button>
+            </div>
+            <div className='overflow-y-auto p-4 scrollbar-thin scrollbar-thumb-purple-600 scrollbar-track-gray-800/50'>
+              <TermsAndConditionsContent />
+            </div>
+            <div className='p-3 border-t border-gray-700/50 text-right'>
+              <Button
+                onClick={() => handleToggleTermsModal()}
+                className={`${
+                  rainbowMode
+                    ? 'animate-rainbow-border'
+                    : 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700'
+                } border-0`}
+              >
+                Close
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
