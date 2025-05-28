@@ -743,10 +743,10 @@ export default function LoonaHashLanding() {
               Roadmap
             </a>
             <a
-              href='#contact'
+              href='/tutorials'
               className='hover:text-purple-400 transition-colors'
             >
-              Contact
+              Tutorials
             </a>
             <Button
               className={`${
@@ -805,10 +805,10 @@ export default function LoonaHashLanding() {
                 Roadmap
               </a>
               <a
-                href='#contact'
+                href='/tutorials'
                 className='hover:text-purple-400 transition-colors'
               >
-                Contact
+                Tutorials
               </a>
               <Button
                 className={`${
