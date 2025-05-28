@@ -1324,7 +1324,7 @@ export default function LoonaHashLanding() {
                 : 'bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent'
             }`}
           >
-            ROADMAP TO THE MOON
+            ROADMAP
           </h2>
 
           <div className='relative'>
@@ -1341,63 +1341,42 @@ export default function LoonaHashLanding() {
               {[
                 {
                   phase: 'Phase 1',
-                  title: 'LAUNCH & IGNITION 🚀',
-                  quarter: 'Q1 2024',
-                  status: 'COMPLETED',
+                  title: 'Advertising & Player Base Establishment',
                   items: [
-                    'Token Launch on DEX',
-                    'Community Building (42K+ Members)',
-                    'Initial Liquidity Pool',
-                    'Meme Contest Winners',
-                    'First 1000 Holders Milestone',
+                    'Strategic marketing campaigns for awareness and user acquisition.',
+                    'Ads across various platforms to attract a diverse audience.',
+                    'Early User Incentives: Extra rewards for the first week of launch.',
+                    'Referral Program: Invite friends and earn rewards.',
+                    'Continuous Feature Enhancements: Regular updates for new features.',
+                    'Community Engagement: Dedicated channel for player information and engagement.',
                   ],
                   gradient: 'from-green-500 to-emerald-500',
                   position: 'left',
                 },
                 {
                   phase: 'Phase 2',
-                  title: 'ECOSYSTEM EXPANSION 🌟',
-                  quarter: 'Q2 2024',
-                  status: 'IN PROGRESS',
+                  title: 'Token Launch & Exchange Flexibility',
                   items: [
-                    'CEX Listings (Binance, Coinbase)',
-                    'Staking Platform Launch',
-                    'NFT Collection Drop',
-                    'Partnership with Major DeFi Protocols',
-                    'Mobile App Beta Release',
+                    'Token Launch Strategy: New token as primary in-game and reward currency.',
+                    'User Exchange Flexibility: Convert mined tokens to TON or Project Token on Raydium.',
+                    'Benefits of Dual Exchange: TON for real-world value, Project Token for ecosystem growth.',
+                    'Sustainable Growth & Liquidity: Internal utility and external liquidity for the token.',
                   ],
                   gradient: 'from-blue-500 to-cyan-500',
                   position: 'right',
                 },
                 {
                   phase: 'Phase 3',
-                  title: 'DEFI DOMINATION 💎',
-                  quarter: 'Q3 2024',
-                  status: 'UPCOMING',
+                  title: 'Season 2, New Project & Ecosystem Expansion',
                   items: [
-                    'Cross-Chain Bridge Implementation',
-                    'Yield Farming Pools',
-                    'DAO Governance Launch',
-                    'Metaverse Integration',
-                    '100K Holders Celebration',
+                    'Season 2 Rollout: Fresh start with new challenges, mechanics, and rewards.',
+                    'Resetting Rewards & Tokens: Ensure a level playing field and balanced economy.',
+                    'Feature Enhancements & New Content: Additional game mechanics and functionalities.',
+                    'Expansion Through a New Project: Develop another project integrated with the existing ecosystem.',
+                    'Strengthening the Token Ecosystem: Expand use cases across multiple projects.',
                   ],
                   gradient: 'from-purple-500 to-pink-500',
                   position: 'left',
-                },
-                {
-                  phase: 'Phase 4',
-                  title: 'GALACTIC CONQUEST 🌌',
-                  quarter: 'Q4 2024',
-                  status: 'FUTURE',
-                  items: [
-                    'Layer 2 Solution Launch',
-                    'AI Trading Bot Integration',
-                    'Real-World Asset Tokenization',
-                    'Space Tourism Partnership',
-                    '1M Holders Moon Party',
-                  ],
-                  gradient: 'from-orange-500 to-red-500',
-                  position: 'right',
                 },
               ].map((phase, index) => (
                 <div
@@ -1416,9 +1395,11 @@ export default function LoonaHashLanding() {
                   />
 
                   <div
-                    className={`w-5/12 ${
-                      phase.position === 'left' ? 'pr-8' : 'pl-8'
-                    }`}
+                    className={`w-full md:w-5/12 ${
+                      phase.position === 'left'
+                        ? 'pr-0 md:pr-8'
+                        : 'pl-0 md:pl-8'
+                    } mb-8 md:mb-0`}
                   >
                     <div
                       className={`group relative p-8 rounded-3xl ${
@@ -1427,21 +1408,6 @@ export default function LoonaHashLanding() {
                           : 'bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-lg border border-gray-700/50 hover:border-purple-500/50'
                       } transition-all duration-500 transform hover:scale-105`}
                     >
-                      {/* Status badge */}
-                      <div
-                        className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold mb-4 ${
-                          phase.status === 'COMPLETED'
-                            ? 'bg-green-500 text-white'
-                            : phase.status === 'IN PROGRESS'
-                            ? 'bg-yellow-500 text-black'
-                            : phase.status === 'UPCOMING'
-                            ? 'bg-blue-500 text-white'
-                            : 'bg-purple-500 text-white'
-                        } ${rainbowMode ? 'animate-pulse' : ''}`}
-                      >
-                        {phase.status}
-                      </div>
-
                       <div
                         className={`inline-flex p-3 rounded-xl bg-gradient-to-r ${phase.gradient} mb-4 group-hover:animate-spin`}
                       >
@@ -1455,21 +1421,18 @@ export default function LoonaHashLanding() {
                       >
                         {phase.phase}
                       </h3>
-                      <h4 className='text-xl font-semibold mb-2 text-purple-400'>
+                      <h4 className='text-xl font-semibold mb-4 text-purple-400'>
                         {phase.title}
                       </h4>
-                      <p className='text-gray-400 mb-4 font-semibold'>
-                        {phase.quarter}
-                      </p>
 
-                      <ul className='space-y-2'>
+                      <ul className='space-y-3'>
                         {phase.items.map((item, itemIndex) => (
                           <li
                             key={itemIndex}
-                            className='flex items-center text-gray-300'
+                            className='flex items-start text-gray-300'
                           >
                             <div
-                              className={`w-2 h-2 bg-gradient-to-r ${phase.gradient} rounded-full mr-3 animate-pulse`}
+                              className={`w-2 h-2 flex-shrink-0 bg-gradient-to-r ${phase.gradient} rounded-full mr-3 mt-[0.4rem] animate-pulse`}
                             />
                             {item}
                           </li>
@@ -1538,7 +1501,7 @@ export default function LoonaHashLanding() {
       </section>
 
       {/* Stats Section */}
-      <section className='relative z-10 py-32 px-6 bg-gradient-to-r from-purple-900/20 to-pink-900/20'>
+      {/* <section className='relative z-10 py-32 px-6 bg-gradient-to-r from-purple-900/20 to-pink-900/20'>
         <div className='max-w-7xl mx-auto'>
           <div className='grid md:grid-cols-4 gap-8 text-center'>
             {[
@@ -1564,7 +1527,7 @@ export default function LoonaHashLanding() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Section */}
       <section className='relative z-10 py-32 px-6'>
