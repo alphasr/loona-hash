@@ -718,12 +718,7 @@ export default function LoonaHashLanding() {
             >
               Features
             </a>
-            <a
-              href='#about'
-              className='hover:text-purple-400 transition-colors'
-            >
-              About
-            </a>
+
             <a
               href='#memes'
               className='hover:text-purple-400 transition-colors'
@@ -780,12 +775,7 @@ export default function LoonaHashLanding() {
               >
                 Features
               </a>
-              <a
-                href='#about'
-                className='hover:text-purple-400 transition-colors'
-              >
-                About
-              </a>
+
               <a
                 href='#memes'
                 className='hover:text-purple-400 transition-colors'
