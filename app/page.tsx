@@ -669,7 +669,7 @@ export default function LoonaHashLanding() {
           <div
             key={i}
             className='absolute w-1 h-1 bg-white rounded-full animate-pulse'
-            style={particleStyles[i] || {}} // Use stored styles
+            style={particleStyles[i] || { display: 'none' }} // Hide if style not ready
           />
         ))}
       </div>
