@@ -198,15 +198,6 @@ export default function TutorialPage() {
       youtubeTopicId: 'ton_telegram',
     },
     {
-      title: 'What is Loonahash? 🤪 (Coming Soon!)',
-      content:
-        'Placeholder content for Loonahash. Stay tuned for updates! (Placeholder: Scrollable list of top YouTube videos will be here!)',
-      meme: 'Something BIG is brewing... 🤫',
-      icon: <Sparkles className='w-8 h-8' />,
-      gradient: 'from-gray-500 via-gray-600 to-gray-700',
-      action: 'Patience, young padawan',
-    },
-    {
       title: 'Crypto Wallets & Secure Payments 🛡️',
       content:
         'Understand how crypto wallets function and how to make secure payments.',
@@ -215,6 +206,15 @@ export default function TutorialPage() {
       gradient: 'from-green-500 via-lime-500 to-emerald-500',
       action: 'Watch Videos',
       youtubeTopicId: 'wallets_security',
+    },
+    {
+      title: 'What is Loonahash? 🤪 (Coming Soon!)',
+      content:
+        'Placeholder content for Loonahash. Stay tuned for updates! (Placeholder: Scrollable list of top YouTube videos will be here!)',
+      meme: 'Something BIG is brewing... 🤫',
+      icon: <Sparkles className='w-8 h-8' />,
+      gradient: 'from-gray-500 via-gray-600 to-gray-700',
+      action: 'Patience, young padawan',
     },
   ];
 
