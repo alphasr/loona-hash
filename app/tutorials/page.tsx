@@ -102,7 +102,6 @@ const youtubeVideoTopics: Record<string, YouTubeVideo[]> = {
 export default function TutorialPage() {
   const [currentStep, setCurrentStep] = useState(0);
   const [crazyMode, setCrazyMode] = useState(false);
-  const [soundEnabled, setSoundEnabled] = useState(false);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
   const [mouseTrail, setMouseTrail] = useState<
     { x: number; y: number; id: number }[]
@@ -509,17 +508,6 @@ export default function TutorialPage() {
             >
               Score: {score}
             </div>
-
-            <Button
-              onClick={() => setSoundEnabled(!soundEnabled)}
-              className='bg-gray-800 hover:bg-gray-700 text-white'
-            >
-              {soundEnabled ? (
-                <Volume2 className='w-5 h-5' />
-              ) : (
-                <VolumeX className='w-5 h-5' />
-              )}
-            </Button>
 
             <Button
               onClick={toggleMemeMode}
