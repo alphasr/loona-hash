@@ -29,10 +29,80 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 
+// Define types for YouTube videos and tutorial steps
+interface YouTubeVideo {
+  id: string;
+  title: string;
+  thumbnail: string;
+  videoId: string;
+}
+
+interface TutorialStep {
+  title: string;
+  content: string;
+  meme: string;
+  icon: React.JSX.Element; // Changed from JSX.Element to React.JSX.Element
+  gradient: string;
+  action: string;
+  youtubeTopicId?: string; // Optional: to link to YouTube video topics
+}
+
+// Placeholder video data for different topics
+const youtubeVideoTopics: Record<string, YouTubeVideo[]> = {
+  crypto_basics: [
+    {
+      id: 'cb1',
+      title: 'Crypto for Absolute Beginners (30 mins)',
+      videoId: '1YyAzVmP9xQ',
+      thumbnail: 'https://img.youtube.com/vi/1YyAzVmP9xQ/mqdefault.jpg',
+    },
+    {
+      id: 'cb2',
+      title: 'What is Cryptocurrency? (Explained)',
+      videoId: '1hlrClock_E',
+      thumbnail: 'https://img.youtube.com/vi/1hlrClock_E/mqdefault.jpg',
+    },
+    {
+      id: 'cb3',
+      title: 'How does a blockchain work (Simply Explained)',
+      videoId: 'bBC-nXj3Ng4',
+      thumbnail: 'https://img.youtube.com/vi/bBC-nXj3Ng4/mqdefault.jpg',
+    },
+  ],
+  ton_telegram: [
+    {
+      id: 'tt1',
+      title: 'What is TON Blockchain? (The Open Network)',
+      videoId: 'placeholder_ton1',
+      thumbnail: 'https://img.youtube.com/vi/placeholder_ton1/mqdefault.jpg',
+    },
+    {
+      id: 'tt2',
+      title: 'Telegram Open Network Explained for Beginners',
+      videoId: 'placeholder_ton2',
+      thumbnail: 'https://img.youtube.com/vi/placeholder_ton2/mqdefault.jpg',
+    },
+  ],
+  wallets_security: [
+    {
+      id: 'ws1',
+      title: 'Crypto Wallets Explained (Hardware vs Software)',
+      videoId: 'placeholder_wallet1',
+      thumbnail: 'https://img.youtube.com/vi/placeholder_wallet1/mqdefault.jpg',
+    },
+    {
+      id: 'ws2',
+      title: 'How to Keep Your Crypto Safe (Top Security Tips)',
+      videoId: 'placeholder_wallet2',
+      thumbnail: 'https://img.youtube.com/vi/placeholder_wallet2/mqdefault.jpg',
+    },
+  ],
+};
+
 export default function TutorialPage() {
   const [currentStep, setCurrentStep] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [crazyMode, setCrazyMode] = useState(true);
+  const [crazyMode, setCrazyMode] = useState(false); // Changed f to false
   const [soundEnabled, setSoundEnabled] = useState(false);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
   const [mouseTrail, setMouseTrail] = useState<
@@ -44,13 +114,17 @@ export default function TutorialPage() {
   const [memeMode, setMemeMode] = useState(false);
   const [score, setScore] = useState(0);
   const [showCompletionModal, setShowCompletionModal] = useState(false);
+  const [showYoutubeModal, setShowYoutubeModal] = useState(false);
+  const [currentYoutubeVideos, setCurrentYoutubeVideos] = useState<
+    YouTubeVideo[]
+  >([]);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const trailIdRef = useRef(0);
   const explosionIdRef = useRef(0);
   const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
 
-  const tutorialSteps = [
+  const tutorialSteps: TutorialStep[] = [
     {
       title: 'Welcome to the CHAOS! 🎉',
       content:
@@ -104,6 +178,45 @@ export default function TutorialPage() {
       icon: <Heart className='w-8 h-8' />,
       gradient: 'from-pink-500 via-red-500 to-orange-500',
       action: 'Share Victory',
+    },
+    {
+      title: 'Crypto for Beginners 👶',
+      content:
+        'Learn the basics of cryptocurrency. What is it? How does it work?',
+      meme: 'To the moon! 🚀',
+      icon: <Lightbulb className='w-8 h-8' />,
+      gradient: 'from-blue-500 via-sky-500 to-cyan-500',
+      action: 'Watch Videos',
+      youtubeTopicId: 'crypto_basics',
+    },
+    {
+      title: 'TON & Telegram Network 💎',
+      content:
+        'Discover The Open Network (TON) and its integration with Telegram.',
+      meme: 'Telegram + Crypto = Magic ✨',
+      icon: <Brain className='w-8 h-8' />,
+      gradient: 'from-sky-500 via-cyan-500 to-blue-500',
+      action: 'Watch Videos',
+      youtubeTopicId: 'ton_telegram',
+    },
+    {
+      title: 'What is Loonahash? 🤪 (Coming Soon!)',
+      content:
+        'Placeholder content for Loonahash. Stay tuned for updates! (Placeholder: Scrollable list of top YouTube videos will be here!)',
+      meme: 'Something BIG is brewing... 🤫',
+      icon: <Sparkles className='w-8 h-8' />,
+      gradient: 'from-gray-500 via-gray-600 to-gray-700',
+      action: 'Patience, young padawan',
+    },
+    {
+      title: 'Crypto Wallets & Secure Payments 🛡️',
+      content:
+        'Understand how crypto wallets function and how to make secure payments.',
+      meme: 'Not your keys, not your crypto! 🔑',
+      icon: <Target className='w-8 h-8' />,
+      gradient: 'from-green-500 via-lime-500 to-emerald-500',
+      action: 'Watch Videos',
+      youtubeTopicId: 'wallets_security',
     },
   ];
 
@@ -337,6 +450,38 @@ export default function TutorialPage() {
     setCompletedSteps([]);
     setScore(0);
     setShowCompletionModal(false);
+    setShowYoutubeModal(false); // Also reset youtube modal
+  };
+
+  const handleStepAction = () => {
+    const currentStepData = tutorialSteps[currentStep];
+    if (currentStepData.youtubeTopicId) {
+      setCurrentYoutubeVideos(
+        youtubeVideoTopics[currentStepData.youtubeTopicId] || []
+      );
+      setShowYoutubeModal(true);
+    } else if (currentStep < tutorialSteps.length - 1) {
+      nextStep();
+    } else {
+      // Last step, not a YouTube step, trigger completion
+      // This case is typically handled by the button being disabled or showing "TUTORIAL COMPLETE"
+      // but if somehow clicked, ensure completion modal shows.
+      setShowCompletionModal(true);
+      createExplosion(window.innerWidth / 2, window.innerHeight / 2);
+    }
+  };
+
+  const handleGlobalNextClick = () => {
+    const currentStepData = tutorialSteps[currentStep];
+    // If the current step is a YouTube lesson, trigger its specific action (shows modal).
+    // The actual progression to nextStep() will happen from the modal's "Done Watching" button.
+    if (currentStepData.youtubeTopicId) {
+      handleStepAction();
+    } else if (currentStep < tutorialSteps.length - 1) {
+      // For non-YouTube steps, or if it's a non-YouTube step that's not the last, proceed.
+      nextStep();
+    }
+    // If it's the last step, the button is disabled, so no explicit action needed here for that case.
   };
 
   return (
@@ -589,8 +734,11 @@ export default function TutorialPage() {
 
                   {/* Action Button */}
                   <Button
-                    onClick={nextStep}
-                    disabled={currentStep === tutorialSteps.length - 1}
+                    onClick={handleStepAction}
+                    disabled={
+                      currentStep === tutorialSteps.length - 1 &&
+                      !tutorialSteps[currentStep].youtubeTopicId
+                    }
                     className={`w-full text-lg py-6 ${
                       crazyMode
                         ? 'animate-rainbow-bg'
@@ -599,12 +747,14 @@ export default function TutorialPage() {
                       memeMode ? 'animate-bounce' : ''
                     }`}
                   >
-                    {currentStep === tutorialSteps.length - 1
+                    {currentStep === tutorialSteps.length - 1 &&
+                    !tutorialSteps[currentStep].youtubeTopicId
                       ? '🎉 TUTORIAL COMPLETE! 🎉'
                       : tutorialSteps[currentStep].action}
-                    {currentStep < tutorialSteps.length - 1 && (
-                      <ChevronRight className='ml-2 w-6 h-6' />
-                    )}
+                    {currentStep < tutorialSteps.length - 1 &&
+                      !tutorialSteps[currentStep].youtubeTopicId && (
+                        <ChevronRight className='ml-2 w-6 h-6' />
+                      )}
                   </Button>
                 </CardContent>
               </Card>
@@ -847,9 +997,10 @@ export default function TutorialPage() {
             </div>
 
             <Button
-              onClick={nextStep}
+              onClick={handleGlobalNextClick} // This should already be pointing to the correct handler
               disabled={currentStep === tutorialSteps.length - 1}
-              className={`${
+              // Corrected className syntax below
+              className={`${ 
                 crazyMode
                   ? 'animate-rainbow-bg'
                   : 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700'
@@ -952,7 +1103,11 @@ export default function TutorialPage() {
             </p>
 
             <div className='flex flex-col sm:flex-row gap-4 justify-center'>
-              <Link href='/'>
+              <a
+                href='https://t.me/LoonaHash_bot'
+                target='_blank'
+                rel='noopener noreferrer'
+              >
                 <Button
                   className={`${
                     crazyMode
@@ -963,7 +1118,7 @@ export default function TutorialPage() {
                   <Rocket className='mr-2 w-6 h-6' />
                   Launch App
                 </Button>
-              </Link>
+              </a>
               <Button
                 onClick={resetTutorial}
                 className='bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 text-lg'
@@ -990,6 +1145,117 @@ export default function TutorialPage() {
           </div>
         </div>
       )}
+
+      {/* YouTube Video Modal */}
+      {showYoutubeModal && (
+        <div className='fixed inset-0 z-[60] flex items-center justify-center p-4'>
+          {' '}
+          {/* Increased z-index */}
+          <div
+            className='absolute inset-0 bg-black/80 backdrop-blur-md' // Darker backdrop
+            onClick={() => setShowYoutubeModal(false)}
+          />
+          <div
+            className={`relative ${
+              crazyMode
+                ? 'animate-border-glow'
+                : 'bg-gradient-to-br from-slate-800 via-slate-900 to-neutral-900 border-2 border-purple-500'
+            } rounded-3xl p-6 sm:p-8 max-w-xl w-full text-white transform transition-all duration-300 ease-out scale-95 animate-modal-enter`}
+            style={{ maxHeight: '90vh' }} // Allow more height
+          >
+            <Button
+              onClick={() => setShowYoutubeModal(false)}
+              variant='ghost'
+              className='absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-white z-10'
+            >
+              <X className='w-7 h-7 sm:w-6 sm:h-6' />
+            </Button>
+            <h2
+              className={`text-2xl sm:text-3xl font-bold mb-6 text-center ${
+                crazyMode ? 'animate-rainbow-text' : 'text-purple-300'
+              }`}
+            >
+              {tutorialSteps[currentStep].icon}
+              <span className='ml-2'>
+                Learn More:{' '}
+                {tutorialSteps[currentStep].title
+                  .replace(/👶|💎|🛡️/g, '')
+                  .trim()}
+              </span>
+            </h2>
+            <div
+              className='overflow-y-auto pr-2'
+              style={{ maxHeight: 'calc(90vh - 180px)' }}
+            >
+              {' '}
+              {/* Scrollable content area */}
+              {currentYoutubeVideos.length > 0 ? (
+                <div className='space-y-4'>
+                  {currentYoutubeVideos.map((video) => (
+                    <a
+                      key={video.id}
+                      href={`https://www.youtube.com/watch?v=${video.videoId}`}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      className={`block p-3 sm:p-4 rounded-xl transition-all duration-200 hover:scale-[1.02] focus:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+                        crazyMode
+                          ? 'bg-white/10 hover:bg-white/20'
+                          : 'bg-slate-700/50 hover:bg-slate-700'
+                      }`}
+                    >
+                      <div className='flex items-center space-x-3 sm:space-x-4'>
+                        <img
+                          src={video.thumbnail}
+                          alt={video.title}
+                          className='w-24 h-14 sm:w-32 sm:h-18 object-cover rounded-md border border-slate-600'
+                        />
+                        <div className='flex-1'>
+                          <h3 className='text-sm sm:text-base font-semibold text-white group-hover:text-purple-300'>
+                            {video.title}
+                          </h3>
+                          <p className='text-xs sm:text-sm text-purple-400 group-hover:text-purple-300 mt-1 inline-flex items-center'>
+                            Watch on YouTube{' '}
+                            <ChevronRight className='w-4 h-4 ml-1' />
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              ) : (
+                <p className='text-center text-gray-400 py-8'>
+                  No videos available for this topic yet. Check back soon!
+                </p>
+              )}
+            </div>
+            <Button
+              onClick={() => {
+                setShowYoutubeModal(false);
+                nextStep(); // Advance to the next lesson
+              }}
+              className={`mt-6 w-full text-base sm:text-lg py-3 ${
+                crazyMode
+                  ? 'animate-rainbow-bg'
+                  : 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700'
+              } text-white font-bold rounded-lg`}
+            >
+              Done Watching
+            </Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
+
+// Add some simple CSS animations for modal enter if not already in globals.css
+// e.g., in your globals.css or a style tag:
+/*
+@keyframes modal-enter {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+.animate-modal-enter {
+  animation: modal-enter 0.3s ease-out forwards;
+}
+*/

@@ -2,137 +2,139 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  .animate-rainbow-text {
-    @apply animate-pulse;
-    background: linear-gradient(
-      to right,
-      #ff0000,
-      #ff7f00,
-      #ffff00,
-      #00ff00,
-      #0000ff,
-      #4b0082,
-      #9400d3
-    );
-    background-size: 200% auto;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: rainbow 3s linear infinite;
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+    --radius: 0.5rem;
   }
 
-  .animate-rainbow-text-reverse {
-    @apply animate-pulse;
-    background: linear-gradient(
-      to left,
-      #ff0000,
-      #ff7f00,
-      #ffff00,
-      #00ff00,
-      #0000ff,
-      #4b0082,
-      #9400d3
-    );
-    background-size: 200% auto;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: rainbow 3s linear infinite;
-  }
-
-  .animate-rainbow-bg {
-    background: linear-gradient(
-      to right,
-      #ff0000,
-      #ff7f00,
-      #ffff00,
-      #00ff00,
-      #0000ff,
-      #4b0082,
-      #9400d3
-    );
-    background-size: 200% auto;
-    animation: rainbow 3s linear infinite;
-  }
-
-  .animate-rainbow-border {
-    position: relative;
-    background: black;
-    z-index: 0;
-  }
-
-  .animate-rainbow-border::before {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    inset: -2px;
-    background: linear-gradient(
-      to right,
-      #ff0000,
-      #ff7f00,
-      #ffff00,
-      #00ff00,
-      #0000ff,
-      #4b0082,
-      #9400d3
-    );
-    background-size: 200% auto;
-    border-radius: 0.5rem;
-    animation: rainbow 3s linear infinite;
-  }
-
-  .animate-border-glow {
-    position: relative;
-    background: rgba(30, 30, 30, 0.5);
-    backdrop-filter: blur(10px);
-    z-index: 0;
-    border-radius: 1rem;
-  }
-
-  .animate-border-glow::before {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    inset: -2px;
-    background: linear-gradient(
-      to right,
-      #ff0000,
-      #ff7f00,
-      #ffff00,
-      #00ff00,
-      #0000ff,
-      #4b0082,
-      #9400d3
-    );
-    background-size: 200% auto;
-    border-radius: 1.2rem;
-    animation: rainbow 3s linear infinite;
-  }
-
-  .animate-float-astronaut {
-    animation: float 20s ease-in-out infinite; /* Updated duration */
-  }
-
-  .animate-spin-slow {
-    animation: spin 10s linear infinite;
-  }
-
-  .animate-spin-reverse {
-    animation: spin-reverse 8s linear infinite;
-  }
-
-  .animate-bounce-slow {
-    animation: bounce 3s infinite;
-  }
-
-  .animate-gradient-x {
-    animation: gradient-x 15s ease infinite;
-    background-size: 400% 400%;
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
   }
 }
 
-@keyframes rainbow {
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Add modal enter animation */
+@keyframes modal-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.animate-modal-enter {
+  animation: modal-enter 0.3s ease-out forwards;
+}
+
+/* Add other global styles and animations from the tutorial page if they were intended to be global */
+@keyframes rainbow-text {
+  0% {
+    color: #ff0000;
+  }
+  14% {
+    color: #ff7f00;
+  }
+  28% {
+    color: #ffff00;
+  }
+  42% {
+    color: #00ff00;
+  }
+  57% {
+    color: #0000ff;
+  }
+  71% {
+    color: #4b0082;
+  }
+  85% {
+    color: #9400d3;
+  }
+  100% {
+    color: #ff0000;
+  }
+}
+.animate-rainbow-text {
+  animation: rainbow-text 6s linear infinite;
+}
+
+@keyframes rainbow-text-reverse {
+  0% {
+    color: #ff0000;
+  }
+  14% {
+    color: #9400d3;
+  }
+  28% {
+    color: #4b0082;
+  }
+  42% {
+    color: #0000ff;
+  }
+  57% {
+    color: #00ff00;
+  }
+  71% {
+    color: #ffff00;
+  }
+  85% {
+    color: #ff7f00;
+  }
+  100% {
+    color: #ff0000;
+  }
+}
+.animate-rainbow-text-reverse {
+  animation: rainbow-text-reverse 6s linear infinite;
+}
+
+@keyframes rainbow-bg {
   0% {
     background-position: 0% 50%;
   }
@@ -143,45 +145,82 @@
     background-position: 0% 50%;
   }
 }
-
-@keyframes float {
-  0% {
-    transform: translateY(0px) rotate(-5deg); /* Adjusted rotation */
-  }
-  50% {
-    transform: translateY(-40px) rotate(5deg); /* Adjusted Y movement and rotation */
-  }
-  100% {
-    transform: translateY(0px) rotate(-5deg); /* Adjusted rotation */
-  }
+.animate-rainbow-bg {
+  background: linear-gradient(
+    to right,
+    red,
+    orange,
+    yellow,
+    green,
+    blue,
+    indigo,
+    violet,
+    red
+  );
+  background-size: 200% 200%;
+  animation: rainbow-bg 8s linear infinite;
 }
 
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
+@keyframes border-glow {
+  0%,
+  100% {
+    border-color: #ff00ff;
+    box-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 15px #ff00ff;
   }
+  50% {
+    border-color: #00ffff;
+    box-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 15px #00ffff;
+  }
+}
+.animate-border-glow {
+  border-width: 2px;
+  animation: border-glow 3s linear infinite;
+}
+
+@keyframes bounce-slow {
+  0%,
+  100% {
+    transform: translateY(-5%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+.animate-bounce-slow {
+  animation: bounce-slow 2s infinite;
+}
+
+@keyframes float-confetti {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-1000px) rotate(720deg);
+    opacity: 0;
+  }
+}
+.animate-float-confetti {
+  animation-name: float-confetti;
+  animation-timing-function: linear;
+}
+
+@keyframes spin-slow {
   to {
     transform: rotate(360deg);
   }
 }
+.animate-spin-slow {
+  animation: spin-slow 3s linear infinite;
+}
 
 @keyframes spin-reverse {
-  from {
-    transform: rotate(0deg);
-  }
   to {
     transform: rotate(-360deg);
   }
 }
-
-@keyframes gradient-x {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+.animate-spin-reverse {
+  animation: spin-reverse 3s linear infinite;
 }
