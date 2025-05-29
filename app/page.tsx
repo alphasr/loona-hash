@@ -858,27 +858,35 @@ export default function LoonaHashLanding() {
             </div>
 
             <div className='flex flex-col sm:flex-row gap-6 justify-center items-center mb-16'>
-              <Button
-                size='lg'
-                className={`${
-                  rainbowMode
-                    ? 'animate-rainbow-bg'
-                    : 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700'
-                } border-0 text-lg px-8 py-4 transform hover:scale-105 transition-all duration-300 shadow-2xl shadow-purple-500/25`}
+              <a
+                href='https://t.me/LoonaHash_bot'
+                target='_blank'
+                rel='noopener noreferrer'
               >
-                Launch App <Rocket className='ml-2' />
-              </Button>
-              <Button
-                size='lg'
-                variant='outline'
-                className={`${
-                  rainbowMode
-                    ? 'animate-rainbow-border text-white'
-                    : 'border-2 border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-black'
-                } text-lg px-8 py-4 transform hover:scale-105 transition-all duration-300`}
-              >
-                Watch Demo <ArrowRight className='ml-2' />
-              </Button>
+                <Button
+                  size='lg'
+                  className={`${
+                    rainbowMode
+                      ? 'animate-rainbow-bg'
+                      : 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700'
+                  } border-0 text-lg px-8 py-4 transform hover:scale-105 transition-all duration-300 shadow-2xl shadow-purple-500/25`}
+                >
+                  Launch App <Rocket className='ml-2' />
+                </Button>
+              </a>
+              <a href='/tutorials'>
+                <Button
+                  size='lg'
+                  variant='outline'
+                  className={`${
+                    rainbowMode
+                      ? 'animate-rainbow-border text-white'
+                      : 'border-2 border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-black'
+                  } text-lg px-8 py-4 transform hover:scale-105 transition-all duration-300`}
+                >
+                  Watch Demo <ArrowRight className='ml-2' />
+                </Button>
+              </a>
             </div>
 
             {/* Scroll Indicator */}

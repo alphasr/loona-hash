@@ -101,8 +101,7 @@ const youtubeVideoTopics: Record<string, YouTubeVideo[]> = {
 
 export default function TutorialPage() {
   const [currentStep, setCurrentStep] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [crazyMode, setCrazyMode] = useState(false); // Changed f to false
+  const [crazyMode, setCrazyMode] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(false);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
   const [mouseTrail, setMouseTrail] = useState<
@@ -122,7 +121,6 @@ export default function TutorialPage() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const trailIdRef = useRef(0);
   const explosionIdRef = useRef(0);
-  const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
 
   const tutorialSteps: TutorialStep[] = [
     {
@@ -244,25 +242,6 @@ export default function TutorialPage() {
       clearInterval(interval);
     };
   }, []);
-
-  // Auto-play functionality
-  useEffect(() => {
-    if (isPlaying) {
-      autoPlayRef.current = setTimeout(() => {
-        if (currentStep < tutorialSteps.length - 1) {
-          nextStep();
-        } else {
-          setIsPlaying(false);
-        }
-      }, 5000);
-    }
-
-    return () => {
-      if (autoPlayRef.current) {
-        clearTimeout(autoPlayRef.current);
-      }
-    };
-  }, [isPlaying, currentStep, tutorialSteps.length]);
 
   // Check for tutorial completion
   useEffect(() => {
@@ -471,19 +450,6 @@ export default function TutorialPage() {
     }
   };
 
-  const handleGlobalNextClick = () => {
-    const currentStepData = tutorialSteps[currentStep];
-    // If the current step is a YouTube lesson, trigger its specific action (shows modal).
-    // The actual progression to nextStep() will happen from the modal's "Done Watching" button.
-    if (currentStepData.youtubeTopicId) {
-      handleStepAction();
-    } else if (currentStep < tutorialSteps.length - 1) {
-      // For non-YouTube steps, or if it's a non-YouTube step that's not the last, proceed.
-      nextStep();
-    }
-    // If it's the last step, the button is disabled, so no explicit action needed here for that case.
-  };
-
   return (
     <div
       className={`min-h-screen relative overflow-hidden ${
@@ -634,32 +600,67 @@ export default function TutorialPage() {
               Tutorial Steps
             </h3>
             <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4'>
-              {tutorialSteps.map((step, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentStep(index)}
-                  className={`p-4 rounded-xl transition-all duration-300 transform hover:scale-105 ${
-                    index === currentStep
-                      ? crazyMode
-                        ? 'animate-border-glow'
-                        : 'bg-purple-600 border-2 border-purple-400'
-                      : index < currentStep
-                      ? 'bg-green-600 border-2 border-green-400'
-                      : 'bg-gray-800 border-2 border-gray-600'
-                  } ${completedSteps.includes(index) ? 'animate-pulse' : ''}`}
-                >
-                  <div
-                    className={`text-2xl mb-2 ${
-                      index <= currentStep ? 'animate-bounce' : ''
+              {tutorialSteps.map((step, index) => {
+                const isCompleted = completedSteps.includes(index);
+                // A step is clickable if it's the first, or it's completed, or the previous one is completed.
+                const isPreviousStepCompletedOrFirst =
+                  index === 0 || completedSteps.includes(index - 1);
+                const isButtonClickable =
+                  isCompleted || isPreviousStepCompletedOrFirst;
+
+                let buttonStyle = '';
+                if (index === currentStep) {
+                  buttonStyle = crazyMode
+                    ? 'animate-border-glow' // Active step
+                    : 'bg-purple-600 border-2 border-purple-400';
+                } else if (isCompleted) {
+                  buttonStyle = 'bg-green-600 border-2 border-green-400'; // Completed step
+                } else if (isPreviousStepCompletedOrFirst) {
+                  // Next available step (not yet completed, but previous is)
+                  buttonStyle =
+                    'bg-blue-500 border-2 border-blue-400 hover:bg-blue-600';
+                } else {
+                  buttonStyle = 'bg-gray-800 border-2 border-gray-600'; // Locked step
+                }
+
+                return (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      if (isButtonClickable) {
+                        setCurrentStep(index);
+                      }
+                    }}
+                    disabled={!isButtonClickable}
+                    className={`p-4 rounded-xl transition-all duration-300 transform ${
+                      isButtonClickable
+                        ? 'hover:scale-105'
+                        : 'opacity-60 cursor-not-allowed'
+                    } ${buttonStyle} ${
+                      isCompleted && index !== currentStep
+                        ? 'animate-pulse'
+                        : '' // Pulse if completed and not current
                     }`}
                   >
-                    {step.icon}
-                  </div>
-                  <div className='text-xs font-bold text-white'>
-                    Step {index + 1}
-                  </div>
-                </button>
-              ))}
+                    <div
+                      className={`text-2xl mb-2 ${
+                        // Bounce if current, or if it's the next step the user can take and it's not yet completed
+                        index === currentStep ||
+                        (isPreviousStepCompletedOrFirst &&
+                          !isCompleted &&
+                          index !== currentStep)
+                          ? 'animate-bounce'
+                          : ''
+                      }`}
+                    >
+                      {step.icon}
+                    </div>
+                    <div className='text-xs font-bold text-white'>
+                      Step {index + 1}
+                    </div>
+                  </button>
+                );
+              })}
             </div>
           </section>
 
@@ -864,6 +865,21 @@ export default function TutorialPage() {
                         name: 'Legend',
                         unlocked: currentStep >= 5,
                       },
+                      {
+                        icon: <Lightbulb className='w-6 h-6' />,
+                        name: 'Enlightened',
+                        unlocked: currentStep >= 6, // Assuming this step exists
+                      },
+                      {
+                        icon: <Gamepad2 className='w-6 h-6' />,
+                        name: 'Player',
+                        unlocked: currentStep >= 7, // Assuming this step exists
+                      },
+                      {
+                        icon: <Sparkles className='w-6 h-6' />,
+                        name: 'Sparkling',
+                        unlocked: currentStep >= 8, // Assuming this step exists
+                      },
                     ].map((achievement, index) => (
                       <div
                         key={index}
@@ -982,25 +998,12 @@ export default function TutorialPage() {
                 <RotateCcw className='mr-2 w-5 h-5' />
                 Restart
               </Button>
-
-              <Button
-                onClick={() => setIsPlaying(!isPlaying)}
-                className='bg-blue-600 hover:bg-blue-700 text-white px-6 py-4'
-              >
-                {isPlaying ? (
-                  <Pause className='mr-2 w-5 h-5' />
-                ) : (
-                  <Play className='mr-2 w-5 h-5' />
-                )}
-                {isPlaying ? 'Pause' : 'Auto'}
-              </Button>
             </div>
 
             <Button
-              onClick={handleGlobalNextClick} // This should already be pointing to the correct handler
+              onClick={nextStep}
               disabled={currentStep === tutorialSteps.length - 1}
-              // Corrected className syntax below
-              className={`${ 
+              className={`${
                 crazyMode
                   ? 'animate-rainbow-bg'
                   : 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700'
