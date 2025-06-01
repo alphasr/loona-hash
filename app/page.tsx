@@ -1081,7 +1081,7 @@ export default function LoonaHashLanding() {
                 : 'bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 bg-clip-text text-transparent'
             }`}
           >
-            $LUNA TOKENOMICS
+            $LOONA TOKENOMICS
           </h2>
 
           {/* Token Stats */}
@@ -1090,14 +1090,14 @@ export default function LoonaHashLanding() {
               {
                 title: 'Total Supply',
                 value: '1,000,000,000',
-                suffix: '$LUNA',
+                suffix: '$LOONA',
                 gradient: 'from-purple-500 to-pink-500',
                 icon: <Star className='w-8 h-8' />,
               },
               {
                 title: 'Circulating',
                 value: '420,690,000',
-                suffix: '$LUNA',
+                suffix: '$LOONA',
                 gradient: 'from-blue-500 to-cyan-500',
                 icon: <Zap className='w-8 h-8' />,
               },
@@ -1163,31 +1163,31 @@ export default function LoonaHashLanding() {
                     label: 'Community & Rewards',
                     percentage: 40,
                     color: 'bg-purple-500',
-                    amount: '400M $LUNA',
+                    amount: '400M $LOONA',
                   },
                   {
                     label: 'Liquidity Pool',
                     percentage: 25,
                     color: 'bg-blue-500',
-                    amount: '250M $LUNA',
+                    amount: '250M $LOONA',
                   },
                   {
                     label: 'Development',
                     percentage: 15,
                     color: 'bg-green-500',
-                    amount: '150M $LUNA',
+                    amount: '150M $LOONA',
                   },
                   {
                     label: 'Marketing',
                     percentage: 10,
                     color: 'bg-yellow-500',
-                    amount: '100M $LUNA',
+                    amount: '100M $LOONA',
                   },
                   {
                     label: 'Team (Locked)',
                     percentage: 10,
                     color: 'bg-red-500',
-                    amount: '100M $LUNA',
+                    amount: '100M $LOONA',
                   },
                 ].map((item, index) => (
                   <div key={index} className='group'>
@@ -1228,7 +1228,7 @@ export default function LoonaHashLanding() {
                         rainbowMode ? 'animate-rainbow-text' : 'text-white'
                       }`}
                     >
-                      $LUNA
+                      $LOONA
                     </div>
                     <div className='text-gray-400'>Token</div>
                   </div>
@@ -1267,7 +1267,7 @@ export default function LoonaHashLanding() {
                 {
                   title: 'Staking Rewards',
                   description:
-                    'Earn up to 420% APY by staking your $LUNA tokens',
+                    'Earn up to 420% APY by staking your $LOONA tokens',
                   icon: <Star className='w-8 h-8' />,
                   gradient: 'from-purple-500 to-pink-500',
                 },
@@ -1474,7 +1474,7 @@ export default function LoonaHashLanding() {
                       : 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700'
                   } border-0 text-lg px-8 py-4 transform hover:scale-105 transition-all duration-300`}
                 >
-                  Buy $LUNA Now <Rocket className='ml-2' />
+                  Buy $LOONA Now <Rocket className='ml-2' />
                 </Button> */}
                 <a
                   href='https://t.me/loonahash_community'
@@ -1582,20 +1582,40 @@ export default function LoonaHashLanding() {
             >
               LoonaHash
             </div>
-            <div className='flex space-x-8 text-gray-400'>
-              <a href='#' className='hover:text-purple-400 transition-colors'>
-                Privacy
-              </a>
-              <a
-                href='#'
-                onClick={handleToggleTermsModal}
-                className='hover:text-purple-400 transition-colors cursor-pointer'
-              >
-                Terms
-              </a>
-              <a href='#' className='hover:text-purple-400 transition-colors'>
-                Support
-              </a>
+            <div className='flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-8'>
+              <div className='flex space-x-4 text-gray-400'>
+                <a
+                  href='https://x.com/LoonaHash_Off'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='hover:text-purple-400 transition-colors'
+                >
+                  X (Twitter)
+                </a>
+                <a
+                  href='https://www.instagram.com/loonahash'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='hover:text-purple-400 transition-colors'
+                >
+                  Instagram
+                </a>
+              </div>
+              <div className='flex space-x-8 text-gray-400'>
+                <a href='#' className='hover:text-purple-400 transition-colors'>
+                  Privacy
+                </a>
+                <a
+                  href='#'
+                  onClick={handleToggleTermsModal}
+                  className='hover:text-purple-400 transition-colors cursor-pointer'
+                >
+                  Terms
+                </a>
+                <a href='#' className='hover:text-purple-400 transition-colors'>
+                  Support
+                </a>
+              </div>
             </div>
           </div>
           <div className='text-center text-gray-500 mt-8'>

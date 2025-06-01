@@ -141,9 +141,9 @@ export default function TutorialPage() {
       action: 'Connect Wallet',
     },
     {
-      title: 'Buy $LUNA Tokens 🌙',
+      title: 'Buy $LOONA Tokens 🌙',
       content:
-        "Time to get some $LUNA! Remember: Buy high, sell low... wait, that's not right! 🤪",
+        "Time to get some $LOONA! Remember: Buy high, sell low... wait, that's not right! 🤪",
       meme: 'Number go UP! 📈',
       icon: <Star className='w-8 h-8' />,
       gradient: 'from-green-500 via-emerald-500 to-teal-500',
@@ -501,13 +501,13 @@ export default function TutorialPage() {
           </Link>
 
           <div className='flex items-center space-x-4'>
-            <div
+            {/* <div
               className={`px-4 py-2 rounded-full ${
                 crazyMode ? 'animate-rainbow-bg' : 'bg-purple-600'
               } text-white font-bold`}
             >
               Score: {score}
-            </div>
+            </div> */}
 
             <Button
               onClick={toggleMemeMode}
@@ -548,7 +548,7 @@ export default function TutorialPage() {
               LEARN OR GET REKT! 🚀
             </h2>
             <p className='text-xl text-gray-300 mt-4 max-w-2xl mx-auto'>
-              Master the art of crypto chaos in 6 easy steps. Warning: Side
+              Master the art of crypto chaos in a few easy steps. Warning: Side
               effects may include moon addiction and diamond hands.
             </p>
           </section>
@@ -758,7 +758,7 @@ export default function TutorialPage() {
                   Your Progress Dashboard
                 </h4>
                 {/* Demo Wallet */}
-                <div
+                {/* <div
                   className={`p-6 rounded-2xl ${
                     crazyMode
                       ? 'animate-border-glow'
@@ -774,13 +774,13 @@ export default function TutorialPage() {
                   </h3>
                   <div className='space-y-3'>
                     <div className='flex justify-between items-center'>
-                      <span className='text-gray-400'>$LUNA Balance:</span>
+                      <span className='text-gray-400'>$LOONA Balance:</span>
                       <span
                         className={`font-bold text-xl ${
                           crazyMode ? 'animate-rainbow-text' : 'text-green-400'
                         }`}
                       >
-                        {(currentStep + 1) * 1000} $LUNA
+                        {(currentStep + 1) * 1000} $LOONA
                       </span>
                     </div>
                     <div className='flex justify-between items-center'>
@@ -790,7 +790,7 @@ export default function TutorialPage() {
                           crazyMode ? 'animate-rainbow-text' : 'text-purple-400'
                         }`}
                       >
-                        {currentStep * 500} $LUNA
+                        {currentStep * 500} $LOONA
                       </span>
                     </div>
                     <div className='flex justify-between items-center'>
@@ -800,11 +800,11 @@ export default function TutorialPage() {
                           crazyMode ? 'animate-rainbow-text' : 'text-yellow-400'
                         }`}
                       >
-                        {currentStep * 42} $LUNA
+                        {currentStep * 42} $LOONA
                       </span>
                     </div>
                   </div>
-                </div>
+                </div> */}
 
                 {/* Achievement Badges */}
                 <div
@@ -899,7 +899,7 @@ export default function TutorialPage() {
                 </div>
 
                 {/* Fun Stats */}
-                <div
+                {/* <div
                   className={`p-6 rounded-2xl ${
                     crazyMode
                       ? 'animate-border-glow'
@@ -958,7 +958,7 @@ export default function TutorialPage() {
                       <div className='text-sm text-gray-400'>Progress</div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </section>
@@ -1005,7 +1005,7 @@ export default function TutorialPage() {
       </main>
 
       {/* Floating Action Buttons */}
-      <div className='fixed bottom-8 right-8 z-30 space-y-4'>
+      {/* <div className='fixed bottom-8 right-8 z-30 space-y-4'>
         <Button
           onClick={() =>
             createExplosion(
@@ -1028,7 +1028,7 @@ export default function TutorialPage() {
         >
           <Lightbulb className='w-8 h-8' />
         </Button>
-      </div>
+      </div> */}
 
       {/* Completion Modal */}
       {showCompletionModal && (
@@ -1075,22 +1075,22 @@ export default function TutorialPage() {
 
             <div className='mb-6'>
               <Confetti className='w-8 h-8 inline-block text-yellow-400 animate-spin-slow' />
-              <span className='text-2xl font-bold text-yellow-400 mx-2'>
+              {/* <span className='text-2xl font-bold text-yellow-400 mx-2'>
                 +1000 BONUS POINTS!
-              </span>
+              </span> */}
               <Confetti className='w-8 h-8 inline-block text-yellow-400 animate-spin-reverse' />
             </div>
 
             <p className='text-xl text-gray-300 mb-8'>
               You've completed the LoonaHash tutorial and are now officially a
-              crypto wizard! Your final score:{' '}
-              <span
+              crypto wizard!
+              {/* <span
                 className={`font-bold ${
                   crazyMode ? 'animate-rainbow-text' : 'text-purple-400'
                 }`}
               >
                 {score + 1000}
-              </span>
+              </span> */}
             </p>
 
             <div className='flex flex-col sm:flex-row gap-4 justify-center'>
