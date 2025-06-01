@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     siteName: 'Loonahash',
     images: [
       {
-        url: '/placeholder-logo.png', // Replace with your actual logo URL
+        url: '/logo.png', // Replace with your actual logo URL
         width: 1200,
         height: 630,
         alt: 'Loonahash Logo',
@@ -26,7 +26,12 @@ export const metadata: Metadata = {
     description: 'A modern hashing utility.',
     // site: '@yourtwitterhandle', // Replace with your Twitter handle
     // creator: '@yourtwitterhandle', // Replace with your Twitter handle
-    images: ['/placeholder-logo.png'], // Replace with your actual logo URL
+    images: ['/logo.png'], // Replace with your actual logo URL
+  },
+  icons: {
+    icon: '/logo.png',
+    apple: '/logo.png',
+    shortcut: '/logo.png',
   },
   robots: {
     index: true,
@@ -39,12 +44,6 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  // Add more metadata as needed, e.g., icons, manifest
-  // icons: {
-  //   icon: '/favicon.ico',
-  //   shortcut: '/favicon-16x16.png',
-  //   apple: '/apple-touch-icon.png',
-  // },
   // manifest: '/site.webmanifest',
 };
 
